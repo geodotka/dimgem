@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block menu1 %}<a href="{% url 'home1' %}">DIM</a>{% endblock %}
+{% block menu2 %}<span style="color: darkgray;">Gramatyka</span>{% endblock %}
+{% block menu3 %}<span style="color: darkgray;">Słownictwo</span>{% endblock %}
+{% block menu4 %}<span style="color: darkgray;">Ciekawostki</span>{% endblock %}
+{% block menu5 %}<span style="color: darkgray;">False friends</span>{% endblock %}
+{% block menu6 %}<a href="{% url 'search' %}">Szukaj</a>{% endblock %}
+{% block menu7 %}<span style="color: yellow;">Kontakt</span>{% endblock %}
+{% block menu8 %}<a href="{% url 'home2' %}">GEM</a>{% endblock %}
+{% block content %}
+    <p>Podziękowania dla Moniki za baner! Inne jej projekty oraz zdjęcia znajdziecie <a href="http://www.whiteeyedhusky.pl/" style="color: darkgreen;">tutaj</a></p>
+    <p>Zdjęcie do baneru wykonała geodotka w miejscowości Tossa di Mare w Hiszpanii.</p>
+<!--    <div class="well">-->
+<!--        <div id="datetimepicker3" class="input-append">-->
+<!--            <input data-format="hh:mm:ss" type="text"></input>-->
+<!--            <span class="add-on">-->
+<!--                <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>-->
+<!--            </span>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--<script type="text/javascript">-->
+<!--  $(function() {-->
+<!--    $('#datetimepicker3').datetimepicker({-->
+<!--      pickDate: false-->
+<!--    });-->
+<!--  });-->
+<!--</script>-->
+    {% if widget %}
+        {{ widget }}
+    {% else %}
+        BAD
+    {% endif %}
+
+{% endblock %}

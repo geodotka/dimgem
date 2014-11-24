@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block menu1 %}
+    {% if page == 'dim' %}
+        <a href="{% url 'home1' %}" style="color: yellow;">DIM</a>
+    {% else %}
+        <a href="{% url 'home2' %}" style="color: yellow;">GEM</a>
+    {% endif %}
+{% endblock %}
+{% block menu2 %}
+    <span style="color: yellow;">Gramatyka</span>
+{% endblock %}
+{% block menu3 %}
+    {% if page == 'dim' %}
+        <a href="{% url 'vocabulary1' %}">Słownictwo</a>
+    {% else %}
+        <a href="{% url 'vocabulary2' %}">Słownictwo</a>
+    {% endif %}
+{% endblock %}
+{% block menu4 %}
+    {% if page == 'dim' %}
+        <a href="{% url 'curiosity1' %}">Ciekawostki</a>
+    {% else %}
+        <a href="{% url 'curiosity2' %}">Ciekawostki</a>
+    {% endif %}
+{% endblock %}
+{% block menu5 %}
+    {% if page == 'dim' %}
+        <a href="{% url 'false_friends1' %}">False friends</a>
+    {% else %}
+        <a href="{% url 'false_friends2' %}">False friends</a>
+    {% endif %}
+{% endblock %}
+{% block menu6 %}<a href="{% url 'search' %}">Szukaj</a>{% endblock %}
+{% block menu7 %}<a href="{% url 'contact' %}">Kontakt</a>{% endblock %}
+{% block menu8 %}
+    {% if page == 'dim' %}
+        <a href="{% url 'home2' %}">GEM</a>
+    {% else %}
+        <a href="{% url 'home1' %}">DIM</a>
+    {% endif %}
+{% endblock %}
+{% block content %}
+    {% if not posts %}
+        <p>Nie ma jeszcze wpisów w tej kategorii</p>
+    {% else %}
+        {% for post in posts %}
+            <hr style="color: darkgreen" />
+            <h4 style="color: darkgreen">{{post.posted_date|date:"d.m.Y"}} {{post.author}}: {{post.title}}</h4>
+            <p>{{post.text|linebreaks}}</p>
+            {% load static from staticfiles %}
+            {% if page == 'dim' %}
+                <a href="{% url 'gramma1' %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" /></a> Podoba mi się
+                <a href="{% url 'gramma1' %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" alt="My image" /></a> Nie podoba mi się
+                &nbsp;&nbsp;&nbsp;&nbsp;Wyniki:&nbsp;&nbsp;
+                {{ post.votes_up }} x <img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" />
+                {{ post.votes_down }} x <img src="{% static 'dimgem/StarSad.png' %}" alt="My image" />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {% if votes %}
+                    {% if votes.post_ip == post.id and votes.vote %}
+                        Ha! Nie oszukuj, już głosował(a/e)ś!
+                    {% endif %}
+                {% endif %}
+            {% else %}
+                <a href="{% url 'gramma2' %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" /></a> Podoba mi się
+                <a href="{% url 'gramma2' %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" alt="My image" /></a> Nie podoba mi się
+                &nbsp;&nbsp;&nbsp;&nbsp;Wyniki:&nbsp;&nbsp;
+                {{ post.votes_up }} x <img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" />
+                {{ post.votes_down }} x <img src="{% static 'dimgem/StarSad.png' %}" alt="My image" />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {% if votes %}
+                    {% if votes.post_id == post.id and votes.vote == False %}
+                        Ha! Nie oszukuj, już głosował(a/e)ś!
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}

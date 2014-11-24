@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block menu1 %}GEM{% endblock %}
+{% block menu2 %}<a href="{% url 'gramma2' %}">Gramatyka</a>{% endblock %}
+{% block menu3 %}<a href="{% url 'vocabulary2' %}">Słownictwo</a>{% endblock %}
+{% block menu4 %}<a href="{% url 'curiosity2' %}">Ciekawostki</a>{% endblock %}
+{% block menu5 %}<a href="{% url 'false_friends2' %}">False friends</a>{% endblock %}
+{% block menu6 %}<a href="{% url 'search' %}">Szukaj</a>{% endblock %}
+{% block menu7 %}<a href="{% url 'contact' %}">Kontakt</a>{% endblock %}
+{% block menu8 %}<a href="{% url 'home1' %}">DIM</a>{% endblock %}
+{% block content %}
+    <h2>GEM - George's English Manual</h2>
+    <ul>
+        <li>"gem" - kamień szlachetny</li>
+    </ul>
+    <hr style="color: darkgreen" />
+    {% if posts %}
+        <h3>Dzisiejsza dawka nauki:</h3>
+        {% for post in posts %}
+            <h4 style="color: darkgreen">
+                Kategoria: {{ post.categories }} <br>
+                {{post.posted_date|date:"d.m.Y"}} {{post.author}}: {{post.title}}
+            </h4>
+            <p>{{post.text|linebreaks}}</p>
+            {% load static from staticfiles %}
+                <a href="{% url 'home2' %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" /></a> Podoba mi się
+                <a href="{% url 'home2' %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" alt="My image" /></a> Nie podoba mi się
+                &nbsp;&nbsp;&nbsp;&nbsp;Wyniki:&nbsp;&nbsp;
+                {{ post.votes_up }} x <img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" />
+                {{ post.votes_down }} x <img src="{% static 'dimgem/StarSad.png' %}" alt="My image" />
+                {% if votes %}
+                    {% if votes.post_id == post.id and votes.vote == False %}
+                        Ha! Nie oszukuj, już głosował(a/e)ś!
+                    {% endif %}
+                {% endif %}
+        {% endfor %}
+    {% else %}
+        <h4>Dziś jeszcze nie było żadnych postów.</h4>
+    {% endif %}
+{% endblock %}

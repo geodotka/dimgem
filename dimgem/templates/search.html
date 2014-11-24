@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block menu1 %}<a href="{% url 'home1' %}">DIM</a>{% endblock %}
+{% block menu2 %}<span style="color: darkgray;">Gramatyka</span>{% endblock %}
+{% block menu3 %}<span style="color: darkgray;">Słownictwo</span>{% endblock %}
+{% block menu4 %}<span style="color: darkgray;">Ciekawostki</span>{% endblock %}
+{% block menu5 %}<span style="color: darkgray;">False friends</span>{% endblock %}
+{% block menu6 %}<span style="color: yellow;">Wyszukaj</span>{% endblock %}
+{% block menu7 %}<a href="{% url 'contact' %}">Kontakt</a>{% endblock %}
+{% block menu8 %}<a href="{% url 'home2' %}">GEM</a>{% endblock %}
+{% block content %}
+    <br>
+    <form action="" method="post">
+        <table>
+        {{ form.as_table }}
+        </table>
+        {% csrf_token %}
+        <input type="submit" value="Szukaj">
+    </form>
+    {% if posts %}
+        {% for post in posts %}
+            <hr style="color: darkgreen" />
+            <h4 style="color: darkgreen">{{post.posted_date|date:"d.m.Y"}} {{post.author}}: {{post.title}}</h4>
+            <p>{{post.text|linebreaks}}</p>
+        {% endfor %}
+    {% else %}
+        {% if word %}
+            <p>Brak postów zawierajacych słowo "{{ word }}"</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}
