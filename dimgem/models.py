@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Category(models.Model):
     name = models.CharField(max_length=30)
     icon = models.ImageField('Ikonka Kategorii', upload_to='icons',
@@ -7,6 +8,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Post(models.Model):
     title = models.CharField(max_length=255)
@@ -16,6 +18,8 @@ class Post(models.Model):
     dim = models.BooleanField()
     categories = models.ForeignKey(Category)
     old_text = models.TextField(null=True, blank=True)
+    picture = models.ImageField(
+        upload_to='dimgem/static/dimgem/post_pictures', null=True,  blank=True)
 
     class Meta:
         ordering = ['-posted_date']
@@ -30,6 +34,7 @@ class Post(models.Model):
     @property
     def votes_down(self):
         return Vote.objects.filter(post=self, vote=False).count()
+
 
 class Vote(models.Model):
     ip = models.IPAddressField()
