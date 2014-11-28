@@ -8,6 +8,13 @@
 {% block menu7 %}<span style="color: yellow;">Kontakt</span>{% endblock %}
 {% block menu8 %}<a href="{% url 'home2' %}">GEM</a>{% endblock %}
 {% block content %}
+	{% load static from staticfiles %}
     <p>Podziękowania dla Moniki za baner! Inne jej projekty oraz zdjęcia znajdziecie <a href="http://www.whiteeyedhusky.pl/" style="color: darkgreen;">tutaj</a></p>
     <p>Zdjęcie do baneru wykonała geodotka w miejscowości Tossa di Mare w Hiszpanii.</p>
+	<div>
+		<p>A oto i geodotka:</p>
+		<img src="{% static 'dimgem/geodotka.JPG' %}" style="width: 400px; height: 300px" alt="Geodotka" /><br>
+		<p>Angel and demon...</p>
+		<p>To ciekawe, że na zdjęciu geodotka jest duża, a Etna jest mała, gdy tymczasem w rzeczywistości jest na odwrót.</p>
+	</div>
 {% endblock %}
