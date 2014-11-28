@@ -31,8 +31,7 @@ def home(request):
 
 
 def contact(request):
-    w = CalendarWidget()
-    return render(request, 'kontakt.html', {'widget': w})
+    return render(request, 'kontakt.html')
 
 
 def show_posts(request):
@@ -124,11 +123,3 @@ def search(request):
         #     return render(request, 'search.html', {'form': form, 'error': True})
     form = SearchingForm()
     return render(request, 'search.html', {'form': form})
-
-
-class CalendarWidget(forms.TextInput):
-    class Media:
-        css = {
-            'all': ('pretty.css',)
-        }
-        js = ('animations.js', 'actions.js')
