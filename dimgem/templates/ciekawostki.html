@@ -47,6 +47,9 @@
             <hr style="color: darkgreen" />
             <h4 style="color: darkgreen">{{post.posted_date|date:"d.m.Y"}} {{post.author}}: {{post.title}}</h4>
             {{post.text|linebreaks}}
+            {% if post.picture %}
+                <img src="{{ post.picture.name|slice:'6:' }}" style="width: 400px; height: 300px" alt="{{ post.picture.name }}" />
+            {% endif %}
             {% load static from staticfiles %}
             {% if page == 'dim' %}
                 <a href="{% url 'curiosity1' %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" /></a> Podoba mi się
