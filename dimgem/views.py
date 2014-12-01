@@ -9,25 +9,33 @@ from dimgem.forms import SearchingForm
 
 
 def home(request):
-    page = request.META['PATH_INFO'][-4:-1]
-    url = ''
-    votes = {}
-    if request.method == "GET" and request.GET.get('post-id') and request.GET.get('vote'):
-        votes = vote(request)
+    return render(request, 'home.html')
 
-    if page == 'dim':
-        url = 'dim.html'
-        context = {
-            'posts': show_todays_posts('dim'),
-            'votes': votes,
-        }
-    if page == 'gem':
-        url = 'gem.html'
-        context = {
-            'posts': show_todays_posts('gem'),
-            'votes': votes,
-        }
-    return render(request, url, context)
+
+def dim(request):
+#     page = request.META['PATH_INFO'][-4:-1]
+#     url = ''
+#     votes = {}
+#     if request.method == "GET" and request.GET.get('post-id') and request.GET.get('vote'):
+#         votes = vote(request)
+#
+#     if page == 'dim':
+#         url = 'dim.html'
+#         context = {
+#             'posts': show_todays_posts('dim'),
+#             'votes': votes,
+#         }
+#     if page == 'gem':
+#         url = 'gem.html'
+#         context = {
+#             'posts': show_todays_posts('gem'),
+#             'votes': votes,
+#         }
+    return render(request, 'dim.html')
+
+
+def gem(request):
+    return render(request, 'gem.html')
 
 
 def contact(request):
