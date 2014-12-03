@@ -6,6 +6,7 @@ import datetime
 from django.views.generic import ListView
 from django.shortcuts import render
 
+from dimgem.const import DIM
 from dimgem.forms import SearchingForm
 from dimgem.models import Category, Post, Vote
 
@@ -51,7 +52,7 @@ class ShowPostView(ListView):
 
     def get_queryset(self):
         category = Category.objects.filter(name=self.category_name)
-        dim = self.template_type == 'dim'
+        dim = self.template_type == DIM
         posts = Post.objects.filter(dim=dim, categories=category).all()
         return posts
 
@@ -89,7 +90,7 @@ def vote(request):
 
 def show_todays_posts(dimgem_type):
     today_date = datetime.datetime.now().date()
-    dimgem = dimgem_type == 'dim'
+    dimgem = dimgem_type == DIM
     posts = Post.objects.filter(posted_date=today_date,
                                 dim=dimgem).order_by('categories').all()
     return posts
