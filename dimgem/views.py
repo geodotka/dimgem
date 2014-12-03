@@ -33,6 +33,27 @@ def contact(request):
 class ShowPostView(ListView):
     model = Post
     paginate_by = 10
+    template_type = ''
+
+    def get_context_data(self, **kwargs):
+        votes = {}
+        if self.request.method == "GET" and \
+                self.request.GET.get('post-id') and \
+                self.request.GET.get('vote'):
+            votes = vote(self.request)
+        context = {
+            'posts': self.get_queryset(),
+            'page': self.template_type,
+            'votes': votes,
+        }
+        return super(ShowPostView, self).get_context_data(**context)
+
+    def get_queryset(self):
+        category_name = self.template_name.split('.')[0].capitalize()
+        category = Category.objects.filter(name=category_name)
+        dim = self.template_type == 'dim'
+        posts = Post.objects.filter(dim=dim, categories=category).all()
+        return posts
 
 
 def show_posts(request):
