@@ -56,43 +56,6 @@ class ShowPostView(ListView):
         return posts
 
 
-def show_posts(request):
-
-    category_path = request.META['PATH_INFO']
-    votes = {}
-    if request.method == "GET" and request.GET.get('post-id') and request.GET.get('vote'):
-        votes = vote(request)
-
-    page = ''
-    url = ''
-    category = None
-    if category_path.endswith('gramatyka/'):
-        page = request.META['PATH_INFO'][-14:-11]
-        url = 'gramatyka.html'
-        category = Category.objects.filter(name='Gramatyka')
-    elif category_path.endswith('slownictwo/'):
-        page = request.META['PATH_INFO'][-15:-12]
-        url = 'slownictwo.html'
-        category = Category.objects.filter(name='Słownictwo')
-    elif category_path.endswith('ciekawostki/'):
-        page = request.META['PATH_INFO'][-16:-13]
-        url = 'ciekawostki.html'
-        category = Category.objects.filter(name='Ciekawostki')
-    elif category_path.endswith('false_friends/'):
-        page = request.META['PATH_INFO'][-18:-15]
-        url = 'false_friends.html'
-        category = Category.objects.filter(name='False friends')
-
-    dim = True if page == 'dim' else False
-    posts = Post.objects.filter(dim=dim, categories=category).all()
-    context = {
-        'posts': posts,
-        'page': page,
-        'votes': votes,
-    }
-    return render(request, url, context)
-
-
 def vote(request):
 
     post_id = int(request.GET.get('post-id'))
