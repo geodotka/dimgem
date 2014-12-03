@@ -25,9 +25,9 @@
 {% endblock %}
 {% block menu5 %}
     {% if page == 'dim' %}
-        <a href="{% url 'false_friends1' %}">False friends</a>
+        <a href="{% url 'dim_false_friends' %}">False friends</a>
     {% else %}
-        <a href="{% url 'false_friends2' %}">False friends</a>
+        <a href="{% url 'gem_false_friends' %}">False friends</a>
     {% endif %}
 {% endblock %}
 {% block menu6 %}<a href="{% url 'search' %}">Szukaj</a>{% endblock %}
@@ -52,14 +52,14 @@
             {% endif %}
             {% load static from staticfiles %}
             {% if page == 'dim' %}
-                <a href="{% url 'curiosity1' %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" /></a> Podoba mi się
-                <a href="{% url 'curiosity1' %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" alt="My image" /></a> Nie podoba mi się
+                <a href="{% url 'dim_curiosities' %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" /></a> Podoba mi się
+                <a href="{% url 'dim_curiosities' %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" alt="My image" /></a> Nie podoba mi się
                 &nbsp;&nbsp;&nbsp;&nbsp;Wyniki:&nbsp;&nbsp;
                 {{ post.votes_up }} x <img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" />
                 {{ post.votes_down }} x <img src="{% static 'dimgem/StarSad.png' %}" alt="My image" />
             {% else %}
-                <a href="{% url 'curiosity2' %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" /></a> Podoba mi się
-                <a href="{% url 'curiosity2' %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" alt="My image" /></a> Nie podoba mi się
+                <a href="{% url 'gem_curiosities' %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" /></a> Podoba mi się
+                <a href="{% url 'gem_curiosities' %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" alt="My image" /></a> Nie podoba mi się
                 &nbsp;&nbsp;&nbsp;&nbsp;Wyniki:&nbsp;&nbsp;
                 {{ post.votes_up }} x <img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" />
                 {{ post.votes_down }} x <img src="{% static 'dimgem/StarSad.png' %}" alt="My image" />
