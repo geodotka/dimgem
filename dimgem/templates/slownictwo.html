@@ -49,14 +49,14 @@
             <p>{{post.text|linebreaks}}</p>
             {% load static from staticfiles %}
             {% if page == 'dim' %}
-                <a href="{% url 'vocabulary1' %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" /></a> Podoba mi się
-                <a href="{% url 'vocabulary1' %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" alt="My image" /></a> Nie podoba mi się
+                <a href="{% url 'dim_vocabulary' %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" /></a> Podoba mi się
+                <a href="{% url 'dim_vocabulary' %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" alt="My image" /></a> Nie podoba mi się
                 &nbsp;&nbsp;&nbsp;&nbsp;Wyniki:&nbsp;&nbsp;
                 {{ post.votes_up }} x <img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" />
                 {{ post.votes_down }} x <img src="{% static 'dimgem/StarSad.png' %}" alt="My image" />
             {% else %}
-                <a href="{% url 'vocabulary2' %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" /></a> Podoba mi się
-                <a href="{% url 'vocabulary2' %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" alt="My image" /></a> Nie podoba mi się
+                <a href="{% url 'gem_vocabulary' %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" /></a> Podoba mi się
+                <a href="{% url 'gem_vocabulary' %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" alt="My image" /></a> Nie podoba mi się
                 &nbsp;&nbsp;&nbsp;&nbsp;Wyniki:&nbsp;&nbsp;
                 {{ post.votes_up }} x <img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" />
                 {{ post.votes_down }} x <img src="{% static 'dimgem/StarSad.png' %}" alt="My image" />
