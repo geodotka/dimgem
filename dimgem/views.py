@@ -15,13 +15,13 @@ def home(request):
     return render(request, 'home.html')
 
 
-def dimgem(request, template_name):
+def dimgem(request, template_name, template_type):
     votes = {}
     if request.method == 'GET' and request.GET.get('post-id') and \
             request.GET.get('vote'):
         votes = vote(request)
     context = {
-        'posts': show_todays_posts(template_name.replace('.html', '')),
+        'posts': show_todays_posts(template_type),
         'votes': votes,
     }
     return render(request, template_name, context)
