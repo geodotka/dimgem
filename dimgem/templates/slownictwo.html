@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 {% block menu1 %}
     {% if page == 'dim' %}
-        <a href="{% url 'home1' %}" style="color: yellow;">DIM</a>
+        <a href="{% url 'dim' %}" style="color: yellow;">DIM</a>
     {% else %}
-        <a href="{% url 'home2' %}" style="color: yellow;">GEM</a>
+        <a href="{% url 'gem' %}" style="color: yellow;">GEM</a>
     {% endif %}
 {% endblock %}
 {% block menu2 %}
     {% if page == 'dim' %}
-        <a href="{% url 'gramma1' %}">Gramatyka</a>
+        <a href="{% url 'dim_grammar' %}">Gramatyka</a>
     {% else %}
-        <a href="{% url 'gramma2' %}">Gramatyka</a>
+        <a href="{% url 'gem_grammar' %}">Gramatyka</a>
     {% endif %}
 {% endblock %}
 {% block menu3 %}
@@ -34,9 +34,9 @@
 {% block menu7 %}<a href="{% url 'contact' %}">Kontakt</a>{% endblock %}
 {% block menu8 %}
     {% if page == 'dim' %}
-        <a href="{% url 'home2' %}">GEM</a>
+        <a href="{% url 'gem' %}">GEM</a>
     {% else %}
-        <a href="{% url 'home1' %}">DIM</a>
+        <a href="{% url 'dim' %}">DIM</a>
     {% endif %}
 {% endblock %}
 {% block content %}

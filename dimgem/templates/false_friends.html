@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 {% block menu1 %}
     {% if page == 'dim' %}
-        <a href="{% url 'home1' %}" style="color: yellow;">DIM</a>
+        <a href="{% url 'dim' %}" style="color: yellow;">DIM</a>
     {% else %}
-        <a href="{% url 'home2' %}" style="color: yellow;">GEM</a>
+        <a href="{% url 'gem' %}" style="color: yellow;">GEM</a>
     {% endif %}
 {% endblock %}
 {% block menu2 %}
     {% if page == 'dim' %}
-        <a href="{% url 'gramma1' %}">Gramatyka</a>
+        <a href="{% url 'dim_grammar' %}">Gramatyka</a>
     {% else %}
-        <a href="{% url 'gramma2' %}">Gramatyka</a>
+        <a href="{% url 'gem_grammar' %}">Gramatyka</a>
     {% endif %}
 {% endblock %}
 {% block menu3 %}
@@ -34,9 +34,9 @@
 {% block menu7 %}<a href="{% url 'contact' %}">Kontakt</a>{% endblock %}
 {% block menu8 %}
     {% if page == 'dim' %}
-        <a href="{% url 'home2' %}">GEM</a>
+        <a href="{% url 'gem' %}">GEM</a>
     {% else %}
-        <a href="{% url 'home1' %}">DIM</a>
+        <a href="{% url 'dim' %}">DIM</a>
     {% endif %}
 {% endblock %}
 {% block content %}
@@ -49,8 +49,8 @@
             <p>{{post.text|linebreaks}}</p>
             {% load static from staticfiles %}
             {% if page == 'dim' %}
-                <a href="{% url 'gramma1' %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" /></a> Podoba mi się
-                <a href="{% url 'gramma1' %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" alt="My image" /></a> Nie podoba mi się
+                <a href="{% url 'dim_grammar' %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" /></a> Podoba mi się
+                <a href="{% url 'dim_grammar' %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" alt="My image" /></a> Nie podoba mi się
                 &nbsp;&nbsp;&nbsp;&nbsp;Wyniki:&nbsp;&nbsp;
                 {{ post.votes_up }} x <img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" />
                 {{ post.votes_down }} x <img src="{% static 'dimgem/StarSad.png' %}" alt="My image" />
@@ -61,8 +61,8 @@
                     {% endif %}
                 {% endif %}
             {% else %}
-                <a href="{% url 'gramma2' %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" /></a> Podoba mi się
-                <a href="{% url 'gramma2' %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" alt="My image" /></a> Nie podoba mi się
+                <a href="{% url 'gem_grammar' %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" /></a> Podoba mi się
+                <a href="{% url 'gem_grammar' %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" alt="My image" /></a> Nie podoba mi się
                 &nbsp;&nbsp;&nbsp;&nbsp;Wyniki:&nbsp;&nbsp;
                 {{ post.votes_up }} x <img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" />
                 {{ post.votes_down }} x <img src="{% static 'dimgem/StarSad.png' %}" alt="My image" />

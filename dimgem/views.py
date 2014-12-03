@@ -3,10 +3,11 @@
 
 import datetime
 
+from django.views.generic import ListView
+from django.shortcuts import render
+
 from dimgem.forms import SearchingForm
 from dimgem.models import Category, Post, Vote
-
-from django.shortcuts import render
 
 
 def home(request):
@@ -27,6 +28,11 @@ def dimgem(request, template_name):
 
 def contact(request):
     return render(request, 'kontakt.html')
+
+
+class ShowPostView(ListView):
+    model = Post
+    paginate_by = 10
 
 
 def show_posts(request):
