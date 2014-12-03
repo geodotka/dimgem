@@ -1,41 +1,28 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
 import datetime
 
-from django import forms
-
-from dimgem.models import Category, Post, Vote
-from django.shortcuts import render
-
 from dimgem.forms import SearchingForm
+from dimgem.models import Category, Post, Vote
+
+from django.shortcuts import render
 
 
 def home(request):
     return render(request, 'home.html')
 
 
-def dim(request):
-#     page = request.META['PATH_INFO'][-4:-1]
-#     url = ''
-#     votes = {}
-#     if request.method == "GET" and request.GET.get('post-id') and request.GET.get('vote'):
-#         votes = vote(request)
-#
-#     if page == 'dim':
-#         url = 'dim.html'
-#         context = {
-#             'posts': show_todays_posts('dim'),
-#             'votes': votes,
-#         }
-#     if page == 'gem':
-#         url = 'gem.html'
-#         context = {
-#             'posts': show_todays_posts('gem'),
-#             'votes': votes,
-#         }
-    return render(request, 'dim.html')
-
-
-def gem(request):
-    return render(request, 'gem.html')
+def dimgem(request, template_name):
+    votes = {}
+    if request.method == 'GET' and request.GET.get('post-id') and \
+            request.GET.get('vote'):
+        votes = vote(request)
+    context = {
+        'posts': show_todays_posts(template_name.replace('.html', '')),
+        'votes': votes,
+    }
+    return render(request, template_name, context)
 
 
 def contact(request):
@@ -112,7 +99,7 @@ def vote(request):
 
 def show_todays_posts(dimgem_type):
     today_date = datetime.datetime.now().date()
-    dimgem = True if dimgem_type == 'dim' else False
+    dimgem = dimgem_type == 'dim'
     posts = Post.objects.filter(posted_date=today_date,
                                 dim=dimgem).order_by('categories').all()
     return posts

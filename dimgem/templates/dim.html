@@ -26,8 +26,8 @@
             </h4>
             <p>{{post.text|linebreaks}}</p>
             {% load static from staticfiles %}
-                <a href="{% url 'home1' %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" /></a> Podoba mi się
-                <a href="{% url 'home1' %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" alt="My image" /></a> Nie podoba mi się
+                <a href="{% url 'dim' %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" /></a> Podoba mi się
+                <a href="{% url 'dim' %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" alt="My image" /></a> Nie podoba mi się
                 &nbsp;&nbsp;&nbsp;&nbsp;Wyniki:&nbsp;&nbsp;
                 {{ post.votes_up }} x <img src="{% static 'dimgem/StarHappy.png' %}" alt="My image" />
                 {{ post.votes_down }} x <img src="{% static 'dimgem/StarSad.png' %}" alt="My image" />

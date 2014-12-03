@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
@@ -7,8 +10,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('dimgem.views',
     url(r'^$', 'home', name='home'),
-    url(r'^dim/$', 'dim', name='dim'),
-    url(r'^gem/$', 'gem', name='gem'),
+    url(r'^dim/$', 'dimgem', {'template_name': 'dim.html'}, name='dim'),
+    url(r'^gem/$', 'dimgem', {'template_name': 'gem.html'}, name='gem'),
     url(r'^dim/gramatyka/$', 'show_posts', name='gramma1'),
     url(r'^gem/gramatyka/$', 'show_posts', name='gramma2'),
     url(r'^dim/slownictwo/$', 'show_posts', name='vocabulary1'),
