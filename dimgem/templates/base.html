@@ -1,47 +1,16 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<head>
-    <title>DimGem</title>
-	<style type="text/css">
-        body {
-            background: #FFFFE0;
-        }
-		a {
-		    text-decoration: none;
-            color: darkgreen;
-            font-family: Tahoma, Geneva, sans-serif;
-		}
-        #menu {
-            width: 100%;
-            height: 35px;
-            font: bold 16px Tahoma, Sans-Serif;
-            text-align: center;
-            background-color: darkgreen;
-            border-radius: 20px;
-            color: white;
-            box-shadow: 0 0 7px black;
-        }
-        #menu ul {
-            height: auto;
-            padding: 8px 0px;
-            margin: 0px;
-        }
-        #menu li {
-            display: inline;
-            padding: 20px;
-        }
-        #menu a {
-            color: white;
-        }
-        .ui-tooltip {
-            padding: 10px 20px;
-            background: darkgreen;
-            color: white;
-            border-radius: 20px;
-            font: bold 14px Tahoma, Sans-Serif;
-            text-transform: uppercase;
-            box-shadow: 0 0 7px black;
-        }
-	</style>
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>DimGem</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+	<link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/style.css" charset="utf-8">
+
+	<script type="text/javascript" src="{{ STATIC_URL }}js/vendor/jquery-1.10.2.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
 </head>
 <body overflow="auto">
     <div id="baner" align="center">
@@ -51,17 +20,36 @@
                  style="border-radius: 40px; box-shadow: 0 0 7px black;"/>
         {% endblock %}
     </div>
-    <div id="menu">
-        <ul>
-            <li class="menu-item" style="color: yellow;">{% block menu1 %}{% endblock %}</li>
-            <li class="menu-item">{% block menu2 %}Gramatyka{% endblock %}</li>
-            <li class="menu-item">{% block menu3 %}Słownictwo{% endblock %}</li>
-            <li class="menu-item">{% block menu4 %}Ciekawostki{% endblock %}</li>
-            <li class="menu-item">{% block menu5 %}False friends{% endblock %}</li>
-            <li class="menu-item">{% block menu6 %}Szukaj{% endblock %}</li>
-            <li class="menu-item">{% block menu7 %}Kontakt{% endblock %}</li>
-            <li class="menu-item">{% block menu8 %}{% endblock %}</li>
-        </ul>
+    <div class="menu">
+		<div class="btn-group">
+			<div class="btn-group">
+				<a class="btn btn-success" role="button" href="{% url 'dim' %}">DIM</a>
+				<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+					<span class="caret"></span>
+					<span class="sr-only">Toggle Dropdown</span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'dim_grammar' %}">Gramatyka</a></li>
+					<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'dim_vocabulary' %}">Słownictwo</a></li>
+					<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'dim_curiosities' %}">Ciekawostki</a></li>
+					<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'dim_false_friends' %}">False friends</a></li>
+				</ul>
+			</div><div class="btn-group">
+				<a class="btn btn-success" role="button" href="{% url 'gem' %}">GEM</a>
+				<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+					<span class="caret"></span>
+					<span class="sr-only">Toggle Dropdown</span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'gem_grammar' %}">Gramatyka</a></li>
+					<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'gem_vocabulary' %}">Słownictwo</a></li>
+					<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'gem_curiosities' %}">Ciekawostki</a></li>
+					<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'gem_false_friends' %}">False friends</a></li>
+				</ul>
+			</div>
+			<a class="btn btn-success" role="button" href="{% url 'search' %}">Szukaj</a>
+			<a class="btn btn-success" role="button" href="{% url 'contact' %}">Kontakt</a>
+		</div>
     </div>
     <div id="content">
         {% block content %}{% endblock %}
