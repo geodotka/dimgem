@@ -1,44 +1,4 @@
 {% extends "base.html" %}
-{% block menu1 %}
-    {% if page == 'dim' %}
-        <a href="{% url 'dim' %}" style="color: yellow;">DIM</a>
-    {% else %}
-        <a href="{% url 'gem' %}" style="color: yellow;">GEM</a>
-    {% endif %}
-{% endblock %}
-{% block menu2 %}
-    {% if page == 'dim' %}
-        <a href="{% url 'dim_grammar' %}">Gramatyka</a>
-    {% else %}
-        <a href="{% url 'gem_grammar' %}">Gramatyka</a>
-    {% endif %}
-{% endblock %}
-{% block menu3 %}
-    {% if page == 'dim' %}
-        <a href="{% url 'dim_vocabulary' %}">Słownictwo</a>
-    {% else %}
-        <a href="{% url 'gem_vocabulary' %}">Słownictwo</a>
-    {% endif %}
-{% endblock %}
-{% block menu4 %}
-    {% if page == 'dim' %}
-        <a href="{% url 'dim_curiosities' %}">Ciekawostki</a>
-    {% else %}
-        <a href="{% url 'gem_curiosities' %}">Ciekawostki</a>
-    {% endif %}
-{% endblock %}
-{% block menu5 %}
-    <span style="color: yellow;">False friends</span>
-{% endblock %}
-{% block menu6 %}<a href="{% url 'search' %}">Szukaj</a>{% endblock %}
-{% block menu7 %}<a href="{% url 'contact' %}">Kontakt</a>{% endblock %}
-{% block menu8 %}
-    {% if page == 'dim' %}
-        <a href="{% url 'gem' %}">GEM</a>
-    {% else %}
-        <a href="{% url 'dim' %}">DIM</a>
-    {% endif %}
-{% endblock %}
 {% block content %}
     {% if not posts %}
         <p>Nie ma jeszcze wpisów w tej kategorii</p>
