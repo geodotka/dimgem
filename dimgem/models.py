@@ -19,7 +19,7 @@ class Post(models.Model):
     categories = models.ForeignKey(Category)
     old_text = models.TextField(null=True, blank=True)
     picture = models.ImageField(
-        upload_to='dimgem/static/dimgem/post_pictures', null=True,  blank=True)
+        upload_to='post_pictures', null=True,  blank=True)
 
     class Meta:
         ordering = ['-posted_date']
