@@ -36,6 +36,7 @@ class ShowPostView(ListView):
     paginate_by = 10
     template_type = ''
     category_name = ''
+    view_name = ''
     # set name of queryset
     context_object_name = 'posts'
 
@@ -47,6 +48,7 @@ class ShowPostView(ListView):
             votes = vote(self.request)
         context = {
             'page': self.template_type,
+            'view_name': self.view_name,
             'votes': votes,
         }
         return super(ShowPostView, self).get_context_data(**context)

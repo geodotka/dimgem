@@ -11,15 +11,8 @@
                 <img src="{{ MEDIA_URL }}{{ post.picture.name }}" style="width: 400px; height: 300px" alt="{{ post.picture.name }}" />
             {% endif %}
             {% load static from staticfiles %}
-            {% if page == 'dim' %}
-                <a href="{% url 'dim_curiosities' %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" /></a> Podoba mi się
-                <a href="{% url 'dim_curiosities' %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" /></a> Nie podoba mi się
-                &nbsp;&nbsp;&nbsp;&nbsp;Wyniki:&nbsp;&nbsp;
-                {{ post.votes_up }} x <img src="{% static 'dimgem/StarHappy.png' %}" />
-                {{ post.votes_down }} x <img src="{% static 'dimgem/StarSad.png' %}" />
-            {% else %}
-                <a href="{% url 'gem_curiosities' %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" /></a> Podoba mi się
-                <a href="{% url 'gem_curiosities' %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" /></a> Nie podoba mi się
+                <a href="{% url view_name %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" /></a> Podoba mi się
+                <a href="{% url view_name %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" /></a> Nie podoba mi się
                 &nbsp;&nbsp;&nbsp;&nbsp;Wyniki:&nbsp;&nbsp;
                 {{ post.votes_up }} x <img src="{% static 'dimgem/StarHappy.png' %}" />
                 {{ post.votes_down }} x <img src="{% static 'dimgem/StarSad.png' %}" />
@@ -29,7 +22,6 @@
                         Ha! Nie oszukuj, już głosował(a/e)ś!
                     {% endif %}
                 {% endif %}
-            {% endif %}
         {% endfor %}
     {% endif %}
 {% endblock %}
