@@ -22,9 +22,10 @@
     </div>
     <div class="menu">
 		<div class="btn-group">
-			<div class="btn-group">
-				<a class="btn btn-success" role="button" href="{% url 'dim' %}">DIM</a>
-				<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+			<a class="btn btn-success menu-item" role="button" href="{% url 'home' %}">Strona główna</a>
+			<div class="btn-group menu-item">
+				<a class="btn btn-success menu-item-link" role="button" href="{% url 'dim' %}">DIM</a>
+				<button type="button" class="btn btn-success dropdown-toggle menu-item-button" data-toggle="dropdown" aria-expanded="false">
 					<span class="caret"></span>
 					<span class="sr-only">Toggle Dropdown</span>
 				</button>
@@ -34,9 +35,10 @@
 					<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'dim_curiosities' %}">Ciekawostki</a></li>
 					<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'dim_false_friends' %}">False friends</a></li>
 				</ul>
-			</div><div class="btn-group">
-				<a class="btn btn-success" role="button" href="{% url 'gem' %}">GEM</a>
-				<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+			</div>
+			<div class="btn-group menu-item">
+				<a class="btn btn-success menu-item-link" role="button" href="{% url 'gem' %}">GEM</a>
+				<button type="button" class="btn btn-success dropdown-toggle menu-item-button" data-toggle="dropdown" aria-expanded="false">
 					<span class="caret"></span>
 					<span class="sr-only">Toggle Dropdown</span>
 				</button>
@@ -47,8 +49,8 @@
 					<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'gem_false_friends' %}">False friends</a></li>
 				</ul>
 			</div>
-			<a class="btn btn-success" role="button" href="{% url 'search' %}">Szukaj</a>
-			<a class="btn btn-success" role="button" href="{% url 'contact' %}">Kontakt</a>
+			<a class="btn btn-success menu-item" role="button" href="{% url 'search' %}">Szukaj</a>
+			<a class="btn btn-success menu-item" role="button" href="{% url 'contact' %}">Kontakt</a>
 		</div>
     </div>
     <div id="content">
