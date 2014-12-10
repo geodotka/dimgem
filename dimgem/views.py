@@ -2,12 +2,15 @@
 # encoding: utf-8
 
 import datetime
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 
 from django.views.generic import ListView
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from dimgem.const import DIM
-from dimgem.forms import SearchingForm
+from dimgem.forms import SearchingForm, RegisterForm, LoginForm
 from dimgem.models import Category, Post, Vote
 
 
@@ -114,3 +117,45 @@ def search(request):
         #     return render(request, 'search.html', {'form': form, 'error': True})
     form = SearchingForm()
     return render(request, 'search.html', {'form': form})
+
+
+def register(request):
+    form = RegisterForm(request.POST or None)
+
+    if form.is_valid():
+        username = request.POST.get('login')
+        password = request.POST.get('password')
+        email = request.POST.get('email')
+
+        user = User.objects.create_user(username=username, email=email)
+        user.set_password(password)
+        user.save()
+        login(request, user)
+
+        redirect_url = reverse('home')
+        return redirect(redirect_url)
+
+    return render(request, 'rejestracja.html', {'form': form})
+
+
+def log_in(request):
+    form = LoginForm(request.POST or None)
+
+    if form.is_valid():
+        username = form.cleaned_data.get('login')
+        password = form.cleaned_data.get('password')
+
+        user = authenticate(username=username, password=password)
+        # TODO: nie podoba mi się takie coś, ale nie chcę w metodzie clean
+        # drugi raz authenticate usera
+        if user is None:
+            context = {
+                'form': form,
+                'error': u'Błędne hasło',
+            }
+            return render(request, 'login.html', context)
+        login(request, user)
+        redirect_url = reverse('add_post')
+        return redirect(redirect_url)
+
+    return render(request, 'login.html', {'form': form})

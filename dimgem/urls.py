@@ -65,6 +65,8 @@ urlpatterns = patterns('dimgem.views',
         name='gem_false_friends'),
     url(r'^szukaj/$', 'search', name='search'),
     url(r'^kontakt/$', 'contact', name='contact'),
+    url(r'^rejestracja/$', 'register', name='register'),
+    url(r'^login/$', 'log_in', name='log_in'),
 
     url(r'^admin/', include(admin.site.urls)),
 )
