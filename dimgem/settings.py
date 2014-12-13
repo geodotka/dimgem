@@ -27,6 +27,14 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    # for request in template
+    'django.core.context_processors.request',
+    # for good working statics in templates
+    'django.core.context_processors.static',
+)
+
 ALLOWED_HOSTS = []
 
 

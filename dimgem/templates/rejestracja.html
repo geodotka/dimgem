@@ -1,31 +1,49 @@
 {% extends "base.html" %}
 {% block content %}
-	<form method="post" class="form-register container" >
+	<form method="post" class="form-horizontal" role="form">
 		{% csrf_token %}
-		<div class="form-group col-md-4">
-			<div class="fieldWrapper">
-				{{ form.login.errors }}
-				<label for="{{ form.login.id_for_label }}">{{ form.login.label }}</label>
-				{{ form.login }}
-			</div>
-			<div class="fieldWrapper">
-				{{ form.password.errors }}
-				<label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
-				{{ form.password }}
-			</div>
-			<div class="fieldWrapper">
-				{{ form.password2.errors }}
-				<label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
-				{{ form.password2 }}
-			</div>
-			<div class="fieldWrapper">
-				{{ form.email.errors }}
-				<label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
-				{{ form.email }}
-			</div>
-		</div>
 		<div>
-			<input type="submit" value="Zarejestruj" />
+			<div class=class="form-group">
+				<label for="{{ form.login.id_for_label }}" class="col-sm-2 control-label">{{ form.login.label }}</label>
+				{{ form.login }}
+				{% if form.login.errors %}
+					{% for error in form.login.errors %}
+						<span class="text-error">{{ error }}</span>
+					{% endfor %}
+				{% endif %}
+			</div>
+			<div class=class="form-group">
+				<label for="{{ form.password.id_for_label }}" class="col-sm-2 control-label">{{ form.password.label }}</label>
+				{{ form.password }}
+				{% if form.password.errors %}
+					{% for error in form.password.errors %}
+						<span class="text-error">{{ error }}</span>
+					{% endfor %}
+				{% endif %}
+			</div>
+			<div class=class="form-group">
+				<label for="{{ form.password2.id_for_label }}" class="col-sm-2 control-label">{{ form.password2.label }}</label>
+				{{ form.password2 }}
+				{% if form.password2.errors %}
+					{% for error in form.password2.errors %}
+						<span class="text-error">{{ error }}</span>
+					{% endfor %}
+				{% endif %}
+			</div>
+			<div class=class="form-group">
+				<label for="{{ form.email.id_for_label }}" class="col-sm-2 control-label">{{ form.email.label }}</label>
+				{{ form.email }}
+				{% if form.email.errors %}
+					{% for error in form.email.errors %}
+						<span class="text-error">{{ error }}</span>
+					{% endfor %}
+				{% endif %}
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-default">Zarejestruj</button>
+				</div>
+			</div>
 		</div>
 	</form>
 {% endblock %}

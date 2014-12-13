@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-	<form method="post" class="form-login container" >
+	<form method="post" class="form-horizontal" role="form">
 		{% csrf_token %}
-		<div class="form-group col-md-4">
-			<div class="fieldWrapper">
-				<label for="{{ form.login.id_for_label }}">{{ form.login.label }}</label>
+		<div>
+			<div class="form-group">
+				<label for="{{ form.login.id_for_label }}" class="col-sm-2 control-label">{{ form.login.label }}</label>
 				{{ form.login }}
 				{% if form.login.errors %}
 					{% for error in form.login.errors %}
@@ -12,20 +12,22 @@
 					{% endfor %}
 				{% endif %}
 			</div>
-			<div class="fieldWrapper">
-				<label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+			<div class="form-group">
+				<label for="{{ form.password.id_for_label }}" class="col-sm-2 control-label">{{ form.password.label }}</label>
 				{{ form.password }}
 				{% if form.password.errors %}
 					{% for error in form.password.errors %}
 						<span class="text-error">{{ error }}</span>
 					{% endfor %}
 				{% endif %}
+				{{ error }}
 			</div>
-			{{ error }}
-		</div>
-		<div>
-			<input type="submit" value="Zaloguj" />
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-default">Zaloguj</button>
+					Nie posiadasz konta? <a href="{% url 'register' %}">Załóż konto</a>
+				</div>
+			</div>
 		</div>
 	</form>
-	Nie posiadasz konta? <a href="{% url 'register' %}">Załóż konto</a>
 {% endblock %}
