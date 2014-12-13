@@ -47,9 +47,9 @@ class ShowPostView(ListView):
                 self.request.GET.get('vote'):
             votes = vote(self.request)
         context = {
-            'page': self.template_type,
             'view_name': self.view_name,
             'votes': votes,
+            'path': self.request.META['PATH_INFO']
         }
         return super(ShowPostView, self).get_context_data(**context)
 
