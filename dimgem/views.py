@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 import datetime
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
@@ -54,7 +54,6 @@ class ShowPostView(ListView):
             'category_name': self.category_name,
             'view_name': self.view_name,
             'votes': votes,
-            'path': self.request.META['PATH_INFO']
         }
         return super(ShowPostView, self).get_context_data(**context)
 
@@ -73,7 +72,8 @@ def vote(request):
         vote = True
     elif request.GET.get('vote') == '0':
         vote = False
-    ip_adress = request.META.get('HTTP_X_FORWARDED_FOR', '') or request.META.get('REMOTE_ADDR')
+    ip_adress = request.META.get('HTTP_X_FORWARDED_FOR','') or \
+                request.META.get('REMOTE_ADDR')
     post = Post.objects.get(pk=post_id)
 
     result = request.session.get('has_voted', False)
@@ -112,9 +112,8 @@ def search(request):
             word = form.cleaned_data['word']
             posts = Post.objects.filter(text__icontains=word)
             return render(request, 'search.html', {'form': form,
-                                                  'posts': posts, 'word': word})
-        # else:
-        #     return render(request, 'search.html', {'form': form, 'error': True})
+                                                   'posts': posts,
+                                                   'word': word})
     form = SearchingForm()
     return render(request, 'search.html', {'form': form})
 
@@ -155,7 +154,12 @@ def log_in(request):
             }
             return render(request, 'login.html', context)
         login(request, user)
-        redirect_url = reverse('add_post')
+        redirect_url = reverse('home')
         return redirect(redirect_url)
 
     return render(request, 'login.html', {'form': form})
+
+
+def log_out(request):
+    logout(request)
+    return render(request, 'logout.html')
