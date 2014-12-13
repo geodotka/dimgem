@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
+	<h3>{{ template_type|upper }} &rsaquo; {{ category_name }}</h3>
     {% if not posts %}
+		<hr />
         <p>Nie ma jeszcze wpisów w tej kategorii</p>
     {% else %}
         {% for post in posts %}
