@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.models import User
 from django.core.validators import MinLengthValidator
 
+from dimgem.models import Post
+
 
 class SearchingForm(forms.Form):
     word = forms.CharField(label='Wpisz szukaną frazę')
@@ -43,3 +45,16 @@ class LoginForm(forms.Form):
         if not User.objects.filter(username=login):
             raise forms.ValidationError(u'Podany login nie istnieje w bazie')
         return login
+
+
+class AddNewPostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title', 'text', 'dim', 'categories', 'picture']
+        labels = {
+            'title': 'Tytuł',
+            'text': 'Treść',
+            'dim': 'Post z części włoskiej?',
+            'categories': 'Kategoria',
+            'picture': 'Obrazek',
+        }

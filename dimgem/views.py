@@ -10,7 +10,7 @@ from django.views.generic import ListView
 from django.shortcuts import render, redirect
 
 from dimgem.const import DIM
-from dimgem.forms import SearchingForm, RegisterForm, LoginForm
+from dimgem.forms import SearchingForm, RegisterForm, LoginForm, AddNewPostForm
 from dimgem.models import Category, Post, Vote
 
 
@@ -163,3 +163,8 @@ def log_in(request):
 def log_out(request):
     logout(request)
     return render(request, 'logout.html')
+
+
+def add_post(request):
+    form = AddNewPostForm(request.POST or None)
+    return render(request, 'add_post.html', {'form': form})
