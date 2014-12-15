@@ -60,7 +60,8 @@ class ShowPostView(ListView):
     def get_queryset(self):
         category = Category.objects.filter(name=self.category_name)
         dim = self.template_type == DIM
-        posts = Post.objects.filter(dim=dim, categories=category).all()
+        posts = Post.objects.filter(
+            dim=dim, categories=category, is_approved=True).all()
         return posts
 
 
@@ -99,8 +100,9 @@ def vote(request):
 def show_todays_posts(dimgem_type):
     today_date = datetime.datetime.now().date()
     dimgem = dimgem_type == DIM
-    posts = Post.objects.filter(posted_date=today_date,
-                                dim=dimgem).order_by('categories').all()
+    posts = Post.objects.filter(
+        posted_date=today_date, dim=dimgem, is_approved=True)\
+        .order_by('categories').all()
     return posts
 
 
@@ -110,7 +112,7 @@ def search(request):
         posts = {}
         if form.is_valid():
             word = form.cleaned_data['word']
-            posts = Post.objects.filter(text__icontains=word)
+            posts = Post.objects.filter(text__icontains=word, is_approved=True)
             return render(request, 'search.html', {'form': form,
                                                    'posts': posts,
                                                    'word': word})
