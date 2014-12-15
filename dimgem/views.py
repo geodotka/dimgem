@@ -3,6 +3,7 @@
 
 import datetime
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
@@ -156,8 +157,7 @@ def log_in(request):
             }
             return render(request, 'login.html', context)
         login(request, user)
-        redirect_url = reverse('home')
-        return redirect(redirect_url)
+        return redirect(request.GET.get('next') or '/')
 
     return render(request, 'login.html', {'form': form})
 
@@ -167,6 +167,34 @@ def log_out(request):
     return render(request, 'logout.html')
 
 
+@login_required
 def add_post(request):
     form = AddNewPostForm(request.POST or None)
+
+    user = request.user.username
+    if user == 'geodotka':
+        author = 'DIM'
+    elif user == 'jerzyt':
+        author = 'GEM'
+    else:
+        author = user
+
+    if form.is_valid():
+        data_dict = {
+            'title': form.cleaned_data['title'],
+            'posted_date': datetime.datetime.now().date(),
+            'author': author,
+            'text': form.cleaned_data['text'],
+            'dim': form.cleaned_data['dim'],
+            'categories': form.cleaned_data['categories'],
+            'picture': form.cleaned_data['picture'],
+            'is_approved': False,
+        }
+        iter_dict = data_dict.copy()
+        for k, v in iter_dict.items():
+            if v is None or v == '':
+                del data_dict[k]
+
+        post = Post.objects.create(**data_dict)
+
     return render(request, 'add_post.html', {'form': form})

@@ -101,3 +101,5 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 STATIC_ROOT = join(_current_dir, 'static')
 MEDIA_ROOT = join(_current_dir, 'media')
+
+LOGIN_URL = '/login/'
