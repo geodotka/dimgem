@@ -20,6 +20,7 @@ class Post(models.Model):
     old_text = models.TextField(null=True, blank=True)
     picture = models.ImageField(
         upload_to='post_pictures', null=True,  blank=True)
+    is_approved = models.BooleanField(default=True)
 
     class Meta:
         ordering = ['-posted_date']
