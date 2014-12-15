@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
-    <br>
-    <form action="" method="post">
-        <table>
-        {{ form.as_table }}
-        </table>
-        {% csrf_token %}
-        <input type="submit" value="Szukaj">
-    </form>
-    {% if posts %}
-        {% for post in posts %}
-            <hr style="color: darkgreen" />
-            <h4 style="color: darkgreen">{{post.posted_date|date:"d.m.Y"}} {{post.author}}: {{post.title}}</h4>
-            <p>{{post.text|linebreaks}}</p>
-        {% endfor %}
-    {% else %}
-        {% if word %}
-            <p>Brak postów zawierajacych słowo "{{ word }}"</p>
-        {% endif %}
-    {% endif %}
+	<br>
+	<form action="" method="post">
+		<table>
+		{{ form.as_table }}
+		</table>
+		{% csrf_token %}
+		<input type="submit" value="Szukaj">
+	</form>
+	{% if posts %}
+		{% for post in posts %}
+			<hr style="color: darkgreen" />
+			<h4 style="color: darkgreen">{{post.posted_date|date:"d.m.Y"}} {{post.author}}: {{post.title}}</h4>
+			<p>{{post.text|linebreaks}}</p>
+		{% endfor %}
+	{% else %}
+		{% if word %}
+			<p>Brak postów zawierajacych słowo "{{ word }}"</p>
+		{% endif %}
+	{% endif %}
 {% endblock %}

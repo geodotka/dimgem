@@ -1,30 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
 	<h3>{{ template_type|upper }} &rsaquo; {{ category_name }}</h3>
-    {% if not posts %}
+	{% if not posts %}
 		<hr />
-        <p>Nie ma jeszcze wpisów w tej kategorii</p>
-    {% else %}
-        {% for post in posts %}
-            <hr />
-            <h4 style="color: darkgreen">{{post.posted_date|date:"d.m.Y"}} {{post.author}}: {{post.title}}</h4>
-            {{post.text|linebreaks}}
-            {% if post.picture %}
-                <img src="{{ MEDIA_URL }}{{ post.picture.name }}" style="width: 400px; height: 300px" alt="{{ post.picture.name }}" />
-            {% endif %}
-            {% load static from staticfiles %}
-                <a href="{% url view_name %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" /></a> Podoba mi się
-                <a href="{% url view_name %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" /></a> Nie podoba mi się
-                &nbsp;&nbsp;&nbsp;&nbsp;Wyniki:&nbsp;&nbsp;
-                {{ post.votes_up }} x <img src="{% static 'dimgem/StarHappy.png' %}" />
-                {{ post.votes_down }} x <img src="{% static 'dimgem/StarSad.png' %}" />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                {% if votes %}
-                    {% if votes.post_id == post.id and votes.vote == False %}
-                        Ha! Nie oszukuj, już głosował(a/e)ś!
-                    {% endif %}
-                {% endif %}
-        {% endfor %}
+		<p>Nie ma jeszcze wpisów w tej kategorii</p>
+	{% else %}
+		{% for post in posts %}
+			<hr />
+			<h4 style="color: darkgreen">{{post.posted_date|date:"d.m.Y"}} {{post.author}}: {{post.title}}</h4>
+			{{post.text|linebreaks}}
+			{% if post.picture %}
+				<img src="{{ MEDIA_URL }}{{ post.picture.name }}" style="width: 400px; height: 300px" alt="{{ post.picture.name }}" />
+			{% endif %}
+			{% load static from staticfiles %}
+				<a href="{% url view_name %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" /></a> Podoba mi się
+				<a href="{% url view_name %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" /></a> Nie podoba mi się
+				&nbsp;&nbsp;&nbsp;&nbsp;Wyniki:&nbsp;&nbsp;
+				{{ post.votes_up }} x <img src="{% static 'dimgem/StarHappy.png' %}" />
+				{{ post.votes_down }} x <img src="{% static 'dimgem/StarSad.png' %}" />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				{% if votes %}
+					{% if votes.post_id == post.id and votes.vote == False %}
+						Ha! Nie oszukuj, już głosował(a/e)ś!
+					{% endif %}
+				{% endif %}
+		{% endfor %}
 		<div>
 		{% if is_paginated %}
 			<hr />
@@ -43,5 +43,5 @@
 			</div>
 		{% endif %}
 		</div>
-    {% endif %}
+	{% endif %}
 {% endblock %}

@@ -13,14 +13,14 @@
 
 </head>
 <body overflow="auto">
-    <div id="baner" align="center">
-        {% block baner %}
-            {% load static from staticfiles %}
-            <img src="{% static 'dimgem/banerdimgem.jpg' %}"
-                 style="border-radius: 40px; box-shadow: 0 0 7px black;"/>
-        {% endblock %}
-    </div>
-    <div class="menu">
+	<div id="baner" align="center">
+		{% block baner %}
+			{% load static from staticfiles %}
+			<img src="{% static 'dimgem/banerdimgem.jpg' %}"
+				 style="border-radius: 40px; box-shadow: 0 0 7px black;"/>
+		{% endblock %}
+	</div>
+	<div class="menu">
 		<div class="btn-group">
 			<a class="btn btn-success menu-item" role="button" href="{% url 'home' %}">Strona główna</a>
 			<div class="btn-group">
@@ -59,15 +59,15 @@
 				<a class="btn btn-success menu-item" role="button" href="{% url 'log_out' %}">Wyloguj</a>
 			{% endif %}
 		</div>
-    </div>
-    <div id="content">
-        {% block content %}{% endblock %}
-    </div>
-    <div id="footer">
-        {% block footer %}
-            <hr style="color: darkgreen">
-            <p>Copyright by geodotka 2014. Made in Poland by geodotka. Nie wszystko jest made in China.</p>
-        {% endblock %}
-    </div>
+	</div>
+	<div id="content">
+		{% block content %}{% endblock %}
+	</div>
+	<div id="footer">
+		{% block footer %}
+			<hr style="color: darkgreen">
+			<p>Copyright by geodotka 2014. Made in Poland by geodotka. Nie wszystko jest made in China.</p>
+		{% endblock %}
+	</div>
 </body>
 </html>
