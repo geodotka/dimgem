@@ -190,7 +190,7 @@ def add_post(request):
             'text': form.cleaned_data['text'],
             'dim': form.cleaned_data['dim'],
             'categories': form.cleaned_data['categories'],
-            'picture': form.cleaned_data['picture'],
+            'picture': request.FILES['picture'],
             'is_approved': False,
         }
         iter_dict = data_dict.copy()
@@ -199,9 +199,10 @@ def add_post(request):
                 del data_dict[k]
 
         post = Post.objects.create(**data_dict)
-        return render(request, 'waiting_room.html')
-
-    return render(request, 'add_post.html', {'form': form})
+        redirect_url = reverse('waiting_room')
+        return redirect(redirect_url)
+    else:
+        return render(request, 'add_post.html', {'form': form})
 
 
 def waiting_room(request):
@@ -209,14 +210,24 @@ def waiting_room(request):
     keeps the posts that are not approved by superuser
     """
     posts = Post.objects.filter(is_approved=False)
+    curiosities_id = Category.objects.get(name='Ciekawostki').id
+    vocabulary_id = Category.objects.get(name='Słownictwo').id
+    grammar_id = Category.objects.get(name='Gramatyka').id
+    false_friends_id = Category.objects.get(name='False friends').id
     context = {
-        'post_dim_curiosities': posts.filter(dim=True, categories=0),
-        'post_dim_vocabulary': posts.filter(dim=True, categories=1),
-        'post_dim_grammar': posts.filter(dim=True, categories=2),
-        'post_dim_false_friends': posts.filter(dim=True, categories=3),
-        'post_gem_curiosities': posts.filter(dim=False, categories=0),
-        'post_gem_vocabulary': posts.filter(dim=False, categories=1),
-        'post_gem_grammar': posts.filter(dim=False, categories=2),
-        'post_gem_false_friends': posts.filter(dim=False, categories=3),
+        'posts_dim_curiosities': posts.filter(dim=True,
+                                              categories=curiosities_id),
+        'posts_dim_vocabulary': posts.filter(dim=True,
+                                             categories=vocabulary_id),
+        'posts_dim_grammar': posts.filter(dim=True, categories=grammar_id),
+        'posts_dim_false_friends': posts.filter(dim=True,
+                                                categories=false_friends_id),
+        'posts_gem_curiosities': posts.filter(dim=False,
+                                              categories=curiosities_id),
+        'posts_gem_vocabulary': posts.filter(dim=False,
+                                             categories=vocabulary_id),
+        'posts_gem_grammar': posts.filter(dim=False, categories=grammar_id),
+        'posts_gem_false_friends': posts.filter(dim=False,
+                                                categories=false_friends_id),
     }
     return render(request, 'waiting_room.html', context)

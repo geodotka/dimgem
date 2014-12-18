@@ -1,19 +1,113 @@
 {% extends "base.html" %}
+
+{% load compress %}
+
 {% block content %}
-	Poczekalnia
-	<ul class="nav nav-tabs">
-		<li role="presentation" class="active"><a href="#">DIM</a></li>
-			{% if post_dim_vocabulary %}
-			<div>
-				<table>
-					{% for post in post_dim_vocabulary %}
-					<tr><td>{{post.posted_date|date:"d.m.Y"}} {{post.author}}: {{post.title}}</h4></td>
-						<td>{{post.text|linebreaks}}</td>
-					</tr>
-					{% endfor %}
-				</table>
-			</div>
-		{% endif %}
-		<li role="presentation"><a href="#">GEM</a></li>
+<div class="content">
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="js-tab active"><a href="#dim" id="dim-tab" aria-controls="dim" role="tab" data-toggle="tab">DIM</a></li>
+		<li role="presentation" class="js-tab"><a href="#gem" id="gem-tab" aria-controls="gem" role="tab" data-toggle="tab">GEM</a></li>
 	</ul>
+	<div id="myTabContent" class="tab-content">
+		<div role="tabpanel" class="tab-pane fade in active" id="dim">
+			{% if not posts_dim_curiosities and not posts_dim_vocabulary and not posts_dim_grammar and not posts_dim_false_friends %}
+				Poczekalnia jest tymczasowo pusta
+			{% else %}
+				<table class="table table-condensed">
+					<tr class="text-center active">
+						<th>Data</th>
+						<th>Autor</th>
+						<th>Tytuł</th>
+						<th>Treść</th>
+						<th>Zdjęcie</th>
+					</tr>
+					{% if posts_dim_curiosities %}
+						<tr>
+							<td colspan="5">Ciekawostki</td>
+						</tr>
+						{% for post in posts_dim_curiosities %}
+							{% include "waiting_room_table.html" %}
+						{% endfor %}
+					{% endif %}
+					{% if posts_dim_vocabulary %}
+						<tr>
+							<td colspan="5">Słownictwo</td>
+						</tr>
+						{% for post in posts_dim_vocabulary %}
+							{% include "waiting_room_table.html" %}
+						{% endfor %}
+					{% endif %}
+					{% if posts_dim_grammar %}
+						<tr>
+							<td colspan="5">Gramatyka</td>
+						</tr>
+						{% for post in posts_dim_grammar %}
+							{% include "waiting_room_table.html" %}
+						{% endfor %}
+					{% endif %}
+					{% if posts_dim_false_friends %}
+						<tr>
+							<td colspan="5">False friends</td>
+						</tr>
+						{% for post in posts_dim_false_friends %}
+							{% include "waiting_room_table.html" %}
+						{% endfor %}
+					{% endif %}
+				</table>
+			{% endif %}
+		</div>
+
+		<div role="tabpanel" class="tab-pane fade" id="gem">
+			{% if not posts_gem_curiosities and not posts_gem_vocabulary and not posts_gem_grammar and not posts_gem_false_friends %}
+				Poczekalnia jest tymczasowo pusta
+			{% else %}
+				<table class="table table-condensed">
+					<tr class="text-center active">
+						<th>Data</th>
+						<th>Autor</th>
+						<th>Tytuł</th>
+						<th>Treść</th>
+						<th>Zdjęcie</th>
+					</tr>
+					{% if posts_gem_curiosities %}
+						<tr>
+							<td colspan="5">Ciekawostki</td>
+						</tr>
+						{% for post in posts_gem_curiosities %}
+							{% include "waiting_room_table.html" %}
+						{% endfor %}
+					{% endif %}
+					{% if posts_gem_vocabulary %}
+						<tr>
+							<td colspan="5">Słownictwo</td>
+						</tr>
+						{% for post in posts_gem_vocabulary %}
+							{% include "waiting_room_table.html" %}
+						{% endfor %}
+					{% endif %}
+					{% if posts_gem_grammar %}
+						<tr>
+							<td colspan="5">Gramatyka</td>
+						</tr>
+						{% for post in posts_gem_grammar %}
+							{% include "waiting_room_table.html" %}
+						{% endfor %}
+					{% endif %}
+					{% if posts_gem_false_friends %}
+						<tr>
+							<td colspan="5">False friends</td>
+						</tr>
+						{% for post in posts_gem_false_friends %}
+							{% include "waiting_room_table.html" %}
+						{% endfor %}
+					{% endif %}
+				</table>
+			{% endif %}
+		</div>
+	</div>
+
+	{% compress js %}
+		<script type="text/coffeescript" src="{{ STATIC_URL }}js/tab_dimgem.coffee"></script>
+	{% endcompress %}
+</div>
 {% endblock %}

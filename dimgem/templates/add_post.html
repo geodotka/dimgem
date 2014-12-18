@@ -1,33 +1,46 @@
 {% extends "base.html" %}
+
+{% load compress %}
+
 {% block content %}
-	<form method="post" role="form">
-		{% csrf_token %}
-		<div>
-			{% for field in form %}
+	<div class="content">
+		<form enctype="multipart/form-data" method="post" role="form">
+			{% csrf_token %}
+			<div>
+				{% for field in form %}
+					<div class="form-group">
+						<label for="{{ field.id_for_label }}" class="col-sm-2 control-label">{{ field.label }}</label>
+						{% if field.text %}
+							<textarea class="form-control" rows="3">{{ field }}</textarea>
+						{% elif field.name == 'picture' %}
+							<div class="js-load-picture">
+								{{ field }}
+							</div>
+							<span class="glyphicon glyphicon-remove js-remove-picture" aria-hidden="true"></span>
+						{% else %}
+							{{ field }}
+						{% endif %}
+						{% if field.errors %}
+							{% for error in field.errors %}
+								<span class="text-error">{{ error }}</span>
+							{% endfor %}
+						{% endif %}
+					</div>
+				{% endfor %}
 				<div class="form-group">
-					<label for="{{ field.id_for_label }}" class="col-sm-2 control-label">{{ field.label }}</label>
-					{% if field.text %}
-						<textarea class="form-control" rows="3">{{ field }}</textarea>
-					{% else %}
-						{{ field }}
-					{% endif %}
-					{% if field.errors %}
-						{% for error in field.errors %}
-							<span class="text-error">{{ error }}</span>
-						{% endfor %}
-					{% endif %}
+					<label class="col-sm-2 control-label">Autor</label>
+					{{ request.user.username}}
 				</div>
-			{% endfor %}
+			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Autor</label>
-				{{ request.user.username}}
+				<div class="col-sm-10">
+					<button type="submit" class="btn btn-default">Zapisz</button>
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-10">
-				<button type="submit" class="btn btn-default">Zapisz</button>
-			</div>
-		</div>
-	</form>
-	<br>
+		</form>
+		<br>
+		{% compress js %}
+			<script type="text/coffeescript" src="{{ STATIC_URL }}js/remove_picture_add_post.coffee"></script>
+		{% endcompress %}
+	</div>
 {% endblock %}

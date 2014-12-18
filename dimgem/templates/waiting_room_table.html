@@ -1,0 +1,13 @@
+<tr class="active">
+	<td>{{post.posted_date|date:"d.m.Y"}}</td>
+	<td>{{post.author}}</td>
+	<td>{{post.title}}</td>
+	<td>{{post.text|linebreaks}}</td>
+	<td>
+		{% if post.picture %}
+			<img src="{{ MEDIA_URL }}{{ post.picture.name }}" style="width: auto; height: 200px" alt="{{ post.picture.name }}" />
+		{% else %}
+			-
+		{% endif %}
+	</td>
+</tr>

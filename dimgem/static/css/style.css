@@ -27,15 +27,23 @@ a {
 }
 
 .menu-item-link {
-    width: 100px;
-    border-radius: 20px;
+    width: 50px;
+    border-radius: 10px;
+    margin: 20px 0px;
 }
 
 .menu-item-button {
     width: 20px;
-    border-radius: 20px;
+    border-radius: 10px;
+    margin: 20px 0px;
 }
 
 .btn-success {
     background: darkgreen;
+}
+
+.content {
+    max-width: 900px;
+    margin : 0 auto;
+    display : block;
 }

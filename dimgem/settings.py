@@ -27,14 +27,6 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    # for request in template
-    'django.core.context_processors.request',
-    # for good working statics in templates
-    'django.core.context_processors.static',
-)
-
 ALLOWED_HOSTS = []
 
 
@@ -49,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'dimgem',
     'south',
+    'compressor',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -68,6 +61,20 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'compressor.finders.CompressorFinder',
+)
+
+COMPRESS_OFFLINE = False
+COMPRESS_PRECOMPILERS = [('text/coffeescript', 'coffee --compile --stdio')]
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    # for good working media in templates
+    'django.core.context_processors.media',
+    # for request in template
+    'django.core.context_processors.request',
+    # for good working statics in templates
+    'django.core.context_processors.static',
 )
 
 # Database

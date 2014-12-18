@@ -23,7 +23,7 @@
     <div class="menu">
 		<div class="btn-group">
 			<a class="btn btn-success menu-item" role="button" href="{% url 'home' %}">Strona główna</a>
-			<div class="btn-group menu-item">
+			<div class="btn-group">
 				<a class="btn btn-success menu-item-link" role="button" href="{% url 'dim' %}">DIM</a>
 				<button type="button" class="btn btn-success dropdown-toggle menu-item-button" data-toggle="dropdown" aria-expanded="false">
 					<span class="caret"></span>
@@ -36,7 +36,7 @@
 					<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'dim_false_friends' %}">False friends</a></li>
 				</ul>
 			</div>
-			<div class="btn-group menu-item">
+			<div class="btn-group">
 				<a class="btn btn-success menu-item-link" role="button" href="{% url 'gem' %}">GEM</a>
 				<button type="button" class="btn btn-success dropdown-toggle menu-item-button" data-toggle="dropdown" aria-expanded="false">
 					<span class="caret"></span>
@@ -49,6 +49,7 @@
 					<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'gem_false_friends' %}">False friends</a></li>
 				</ul>
 			</div>
+			<a class="btn btn-success menu-item" role="button" href="{% url 'waiting_room' %}">Poczekalnia</a>
 			<a class="btn btn-success menu-item" role="button" href="{% url 'search' %}">Szukaj</a>
 			<a class="btn btn-success menu-item" role="button" href="{% url 'contact' %}">Kontakt</a>
 			<a class="btn btn-success menu-item" role="button" href="{% url 'add_post' %}">Dodaj post</a>
