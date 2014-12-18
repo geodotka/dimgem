@@ -157,7 +157,10 @@ def log_in(request):
             }
             return render(request, 'login.html', context)
         login(request, user)
-        return redirect(request.GET.get('next') or '/')
+        next_page = request.GET.get('next', None)
+        if next_page == '/logout/':
+            next_page = '/'
+        return redirect(next_page or '/')
 
     return render(request, 'login.html', {'form': form})
 
@@ -196,5 +199,24 @@ def add_post(request):
                 del data_dict[k]
 
         post = Post.objects.create(**data_dict)
+        return render(request, 'waiting_room.html')
 
     return render(request, 'add_post.html', {'form': form})
+
+
+def waiting_room(request):
+    """
+    keeps the posts that are not approved by superuser
+    """
+    posts = Post.objects.filter(is_approved=False)
+    context = {
+        'post_dim_curiosities': posts.filter(dim=True, categories=0),
+        'post_dim_vocabulary': posts.filter(dim=True, categories=1),
+        'post_dim_grammar': posts.filter(dim=True, categories=2),
+        'post_dim_false_friends': posts.filter(dim=True, categories=3),
+        'post_gem_curiosities': posts.filter(dim=False, categories=0),
+        'post_gem_vocabulary': posts.filter(dim=False, categories=1),
+        'post_gem_grammar': posts.filter(dim=False, categories=2),
+        'post_gem_false_friends': posts.filter(dim=False, categories=3),
+    }
+    return render(request, 'waiting_room.html', context)

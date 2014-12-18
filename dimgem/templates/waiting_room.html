@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+	Poczekalnia
+	<ul class="nav nav-tabs">
+		<li role="presentation" class="active"><a href="#">DIM</a></li>
+			{% if post_dim_vocabulary %}
+			<div>
+				<table>
+					{% for post in post_dim_vocabulary %}
+					<tr><td>{{post.posted_date|date:"d.m.Y"}} {{post.author}}: {{post.title}}</h4></td>
+						<td>{{post.text|linebreaks}}</td>
+					</tr>
+					{% endfor %}
+				</table>
+			</div>
+		{% endif %}
+		<li role="presentation"><a href="#">GEM</a></li>
+	</ul>
+{% endblock %}

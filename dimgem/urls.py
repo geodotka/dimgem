@@ -69,6 +69,7 @@ urlpatterns = patterns('dimgem.views',
     url(r'^login/$', 'log_in', name='log_in'),
     url(r'^logout/$', 'log_out', name='log_out'),
     url(r'^dodaj_post/$', 'add_post', name='add_post'),
+    url(r'^poczekalnia/$', 'waiting_room', name='waiting_room'),
 
     url(r'^admin/', include(admin.site.urls)),
 )
