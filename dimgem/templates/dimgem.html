@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+	<h3>One post a day, and life is OK.</h3>
+	{% if template_type == 'dim' %}
+		<h2>DIM - Dorothy's Italian Manual</h2>
+		<ul>
+			<li>"dim light" - przyćmione światło</li>
+			<li>"dim voice" - słaby głos</li>
+			<li>"dim recollection" - niewyraźne wspomnienie</li>
+			<li>"dim feelings" - niejasne uczucia</li>
+			<li>"dim outlook" - marne widoki</li>
+		</ul>
+	{% endif %}
+	{% if template_type == 'gem' %}
+		<h2>GEM - George's English Manual</h2>
+		<ul>
+			<li>"gem" - kamień szlachetny</li>
+		</ul>
+	{% endif %}
+
+    {% if posts %}
+        <h3>Dzisiejsza dawka nauki:</h3>
+        {% for post in posts %}
+            <hr style="color: darkgreen">
+                Kategoria: {{ post.categories }} <br>
+                {{post.posted_date|date:"d.m.Y"}} {{post.author}}: {{post.title}}
+            </h4>
+            <p>{{post.text|linebreaks}}</p>
+            {% load static from staticfiles %}
+                <a href="{% url view_name %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" /></a> Podoba mi się
+                <a href="{% url view_name %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" /></a> Nie podoba mi się
+                &nbsp;&nbsp;&nbsp;&nbsp;Wyniki:&nbsp;&nbsp;
+                {{ post.votes_up }} x <img src="{% static 'dimgem/StarHappy.png' %}" />
+                {{ post.votes_down }} x <img src="{% static 'dimgem/StarSad.png' %}" />
+                {% if votes %}
+                    {% if votes.post_id == post.id and votes.vote == False %}
+                        Ha! Nie oszukuj, już głosował(a/e)ś!
+                    {% endif %}
+                {% endif %}
+        {% endfor %}
+    {% else %}
+        <h4>Dziś jeszcze nie było żadnych postów.</h4>
+    {% endif %}
+{% endblock %}

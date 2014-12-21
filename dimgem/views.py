@@ -19,16 +19,17 @@ def home(request):
     return render(request, 'home.html')
 
 
-def dimgem(request, template_name, template_type):
+def dimgem(request, view_name):
     votes = {}
     if request.method == 'GET' and request.GET.get('post-id') and \
             request.GET.get('vote'):
         votes = vote(request)
     context = {
-        'posts': show_todays_posts(template_type),
+        'posts': show_todays_posts(view_name),
+        'view_name': view_name,
         'votes': votes,
     }
-    return render(request, template_name, context)
+    return render(request, 'dimgem.html', context)
 
 
 def contact(request):
