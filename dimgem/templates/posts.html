@@ -2,15 +2,15 @@
 {% block content %}
 	<h3>{{ template_type|upper }} &rsaquo; {{ category_name }}</h3>
 	{% if not posts %}
-		<hr />
+		<hr>
 		<p>Nie ma jeszcze wpisów w tej kategorii</p>
 	{% else %}
 		{% for post in posts %}
-			<hr />
-			<h4 style="color: darkgreen">{{post.posted_date|date:"d.m.Y"}} {{post.author}}: {{post.title}}</h4>
+			<hr>
+			<h4>{{post.posted_date|date:"d.m.Y"}} {{post.author}}: {{post.title}}</h4>
 			{{post.text|linebreaks}}
 			{% if post.picture %}
-				<img src="{{ MEDIA_URL }}{{ post.picture.name }}" style="width: 400px; height: 300px" alt="{{ post.picture.name }}" />
+				<img src="{{ MEDIA_URL }}{{ post.picture.name }}" alt="{{ post.picture.name }}" class="post-picture" />
 			{% endif %}
 			{% load static from staticfiles %}
 				<a href="{% url view_name %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" /></a> Podoba mi się
@@ -27,7 +27,7 @@
 		{% endfor %}
 		<div>
 		{% if is_paginated %}
-			<hr />
+			<hr>
 			<div class="pagination">
 				<span class="page-links">
 					{% if page_obj.has_previous %}

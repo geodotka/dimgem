@@ -13,61 +13,64 @@
 
 </head>
 <body overflow="auto">
-	<div id="baner" align="center">
-		{% block baner %}
-			{% load static from staticfiles %}
-			<img src="{% static 'dimgem/banerdimgem.jpg' %}"
-				 style="border-radius: 40px; box-shadow: 0 0 7px black;"/>
-		{% endblock %}
-	</div>
-	<div class="menu">
-		<div class="btn-group">
-			<a class="btn btn-success menu-item" role="button" href="{% url 'home' %}">Strona główna</a>
-			<div class="btn-group">
-				<a class="btn btn-success menu-item-link" role="button" href="{% url 'dim' %}">DIM</a>
-				<button type="button" class="btn btn-success dropdown-toggle menu-item-button" data-toggle="dropdown" aria-expanded="false">
-					<span class="caret"></span>
-					<span class="sr-only">Toggle Dropdown</span>
-				</button>
-				<ul class="dropdown-menu" role="menu">
-					<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'dim_grammar' %}">Gramatyka</a></li>
-					<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'dim_vocabulary' %}">Słownictwo</a></li>
-					<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'dim_curiosities' %}">Ciekawostki</a></li>
-					<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'dim_false_friends' %}">False friends</a></li>
-				</ul>
+	<div class="wrapper" id="wrapper">
+		<header>
+			<div class="baner">
+				{% block baner %}
+					{% load static from staticfiles %}
+					<img src="{% static 'dimgem/banerdimgem.jpg' %}">
+				{% endblock %}
 			</div>
-			<div class="btn-group">
-				<a class="btn btn-success menu-item-link" role="button" href="{% url 'gem' %}">GEM</a>
-				<button type="button" class="btn btn-success dropdown-toggle menu-item-button" data-toggle="dropdown" aria-expanded="false">
-					<span class="caret"></span>
-					<span class="sr-only">Toggle Dropdown</span>
-				</button>
-				<ul class="dropdown-menu" role="menu">
-					<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'gem_grammar' %}">Gramatyka</a></li>
-					<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'gem_vocabulary' %}">Słownictwo</a></li>
-					<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'gem_curiosities' %}">Ciekawostki</a></li>
-					<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'gem_false_friends' %}">False friends</a></li>
-				</ul>
+			<div class="menu">
+				<div class="btn-group">
+					<a class="btn btn-success menu-item" role="button" href="{% url 'home' %}">Strona główna</a>
+					<div class="btn-group">
+						<a class="btn btn-success menu-item-link" role="button" href="{% url 'dim' %}">DIM</a>
+						<button type="button" class="btn btn-success dropdown-toggle menu-item-button" data-toggle="dropdown" aria-expanded="false">
+							<span class="caret"></span>
+							<span class="sr-only">Toggle Dropdown</span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'dim_grammar' %}">Gramatyka</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'dim_vocabulary' %}">Słownictwo</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'dim_curiosities' %}">Ciekawostki</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'dim_false_friends' %}">False friends</a></li>
+						</ul>
+					</div>
+					<div class="btn-group">
+						<a class="btn btn-success menu-item-link" role="button" href="{% url 'gem' %}">GEM</a>
+						<button type="button" class="btn btn-success dropdown-toggle menu-item-button" data-toggle="dropdown" aria-expanded="false">
+							<span class="caret"></span>
+							<span class="sr-only">Toggle Dropdown</span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'gem_grammar' %}">Gramatyka</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'gem_vocabulary' %}">Słownictwo</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'gem_curiosities' %}">Ciekawostki</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'gem_false_friends' %}">False friends</a></li>
+						</ul>
+					</div>
+					<a class="btn btn-success menu-item" role="button" href="{% url 'waiting_room' %}">Poczekalnia</a>
+					<a class="btn btn-success menu-item" role="button" href="{% url 'search' %}">Szukaj</a>
+					<a class="btn btn-success menu-item" role="button" href="{% url 'contact' %}">Kontakt</a>
+					<a class="btn btn-success menu-item" role="button" href="{% url 'add_post' %}">Dodaj post</a>
+					{% if not request.user.is_authenticated %}
+						<a class="btn btn-success menu-item" role="button" href="{% url 'log_in' %}?next={{request.path}}">Zaloguj</a>
+					{% else %}
+						<a class="btn btn-success menu-item" role="button" href="{% url 'log_out' %}">Wyloguj</a>
+					{% endif %}
+				</div>
 			</div>
-			<a class="btn btn-success menu-item" role="button" href="{% url 'waiting_room' %}">Poczekalnia</a>
-			<a class="btn btn-success menu-item" role="button" href="{% url 'search' %}">Szukaj</a>
-			<a class="btn btn-success menu-item" role="button" href="{% url 'contact' %}">Kontakt</a>
-			<a class="btn btn-success menu-item" role="button" href="{% url 'add_post' %}">Dodaj post</a>
-			{% if not request.user.is_authenticated %}
-				<a class="btn btn-success menu-item" role="button" href="{% url 'log_in' %}?next={{request.path}}">Zaloguj</a>
-			{% else %}
-				<a class="btn btn-success menu-item" role="button" href="{% url 'log_out' %}">Wyloguj</a>
-			{% endif %}
+		</header>
+		<div class="content">
+			{% block content %}{% endblock %}
 		</div>
-	</div>
-	<div id="content">
-		{% block content %}{% endblock %}
-	</div>
-	<div id="footer">
-		{% block footer %}
-			<hr style="color: darkgreen">
-			<p>Copyright by geodotka 2014. Made in Poland by geodotka. Nie wszystko jest made in China.</p>
-		{% endblock %}
+		<div class="footer">
+			{% block footer %}
+				<hr>
+				<p>Copyright by geodotka 2014. Made in Poland by geodotka. Nie wszystko jest made in China.</p>
+			{% endblock %}
+		</div>
 	</div>
 </body>
 </html>

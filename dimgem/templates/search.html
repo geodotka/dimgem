@@ -10,8 +10,8 @@
 	</form>
 	{% if posts %}
 		{% for post in posts %}
-			<hr style="color: darkgreen" />
-			<h4 style="color: darkgreen">{{post.posted_date|date:"d.m.Y"}} {{post.author}}: {{post.title}}</h4>
+			<hr>
+			<h4>{{post.posted_date|date:"d.m.Y"}} {{post.author}}: {{post.title}}</h4>
 			<p>{{post.text|linebreaks}}</p>
 		{% endfor %}
 	{% else %}

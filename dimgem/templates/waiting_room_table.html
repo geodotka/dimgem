@@ -3,9 +3,9 @@
 	<td>{{post.author}}</td>
 	<td>{{post.title}}</td>
 	<td>{{post.text|linebreaks}}</td>
-	<td>
+	<td class="waiting-room-picture">
 		{% if post.picture %}
-			<img src="{{ MEDIA_URL }}{{ post.picture.name }}" style="width: auto; height: 200px" alt="{{ post.picture.name }}" />
+			<img src="{{ MEDIA_URL }}{{ post.picture.name }}" alt="{{ post.picture.name }}" />
 		{% else %}
 			-
 		{% endif %}

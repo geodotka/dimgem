@@ -21,11 +21,14 @@
     {% if posts %}
         <h3>Dzisiejsza dawka nauki:</h3>
         {% for post in posts %}
-            <hr style="color: darkgreen">
+            <hr>
                 Kategoria: {{ post.categories }} <br>
                 {{post.posted_date|date:"d.m.Y"}} {{post.author}}: {{post.title}}
             </h4>
             <p>{{post.text|linebreaks}}</p>
+			{% if post.picture %}
+				<img src="{{ MEDIA_URL }}{{ post.picture.name }}" alt="{{ post.picture.name }}" class="post-picture" />
+			{% endif %}
             {% load static from staticfiles %}
                 <a href="{% url view_name %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" /></a> Podoba mi się
                 <a href="{% url view_name %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" /></a> Nie podoba mi się

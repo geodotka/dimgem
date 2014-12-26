@@ -6,6 +6,22 @@ a {
     color: darkgreen;
     font-family: Tahoma, Geneva, sans-serif;
 }
+
+.wrapper {
+    max-width: 900px;
+    margin : 0 auto;
+    display : block;
+}
+
+.baner img {
+    max-width: 900px;
+    height: auto;
+    border-radius: 40px;
+    box-shadow: 0 0 7px black;
+    margin-top : 10px;
+    margin-bottom : 10px;
+}
+
 .menu {
     width: 900px;
     height: 70px;
@@ -38,16 +54,42 @@ a {
     margin: 20px 0px;
 }
 
+.content {
+    margin-top : 10px;
+    margin-bottom : 10px;
+}
+
+.footer {
+    position:relative;
+    bottom:0;
+}
+
 .btn-success {
     background: darkgreen;
 }
 
-.content {
-    max-width: 900px;
-    margin : 0 auto;
-    display : block;
-}
-
 .js-load-picture {
     display: inline-block;
+}
+
+.post-picture {
+    width: auto;
+    height: 300px;
+}
+
+.waiting-room .waiting-room-picture {
+    text-align: center;
+}
+
+.waiting-room img {
+    width: auto;
+    height: 200px;
+}
+
+h4 {
+     color: darkgreen;
+}
+
+.outer-link {
+     color: darkgreen;
 }

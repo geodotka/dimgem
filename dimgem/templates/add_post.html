@@ -3,44 +3,41 @@
 {% load compress %}
 
 {% block content %}
-	<div class="content">
-		<form enctype="multipart/form-data" method="post" role="form">
-			{% csrf_token %}
-			<div>
-				{% for field in form %}
-					<div class="form-group">
-						<label for="{{ field.id_for_label }}" class="col-sm-2 control-label">{{ field.label }}</label>
-						{% if field.text %}
-							<textarea class="form-control" rows="3">{{ field }}</textarea>
-						{% elif field.name == 'picture' %}
-							<div class="js-load-picture">
-								{{ field }}
-							</div>
-							<span class="glyphicon glyphicon-remove js-remove-picture" aria-hidden="true"></span>
-						{% else %}
-							{{ field }}
-						{% endif %}
-						{% if field.errors %}
-							{% for error in field.errors %}
-								<span class="text-error">{{ error }}</span>
-							{% endfor %}
-						{% endif %}
-					</div>
-				{% endfor %}
+	<form enctype="multipart/form-data" method="post" role="form">
+		{% csrf_token %}
+		<div>
+			{% for field in form %}
 				<div class="form-group">
-					<label class="col-sm-2 control-label">Autor</label>
-					{{ request.user.username}}
+					<label for="{{ field.id_for_label }}" class="col-sm-2 control-label">{{ field.label }}</label>
+					{% if field.text %}
+						<textarea class="form-control" rows="3">{{ field }}</textarea>
+					{% elif field.name == 'picture' %}
+						<div class="js-load-picture">
+							{{ field }}
+						</div>
+						<span class="glyphicon glyphicon-remove js-remove-picture" aria-hidden="true"></span>
+					{% else %}
+						{{ field }}
+					{% endif %}
+					{% if field.errors %}
+						{% for error in field.errors %}
+							<span class="text-error">{{ error }}</span>
+						{% endfor %}
+					{% endif %}
 				</div>
-			</div>
+			{% endfor %}
 			<div class="form-group">
-				<div class="col-sm-10">
-					<button type="submit" class="btn btn-default">Zapisz</button>
-				</div>
+				<label class="col-sm-2 control-label">Autor</label>
+				{{ request.user.username}}
 			</div>
-		</form>
-		<br>
-		{% compress js %}
-			<script type="text/coffeescript" src="{{ STATIC_URL }}js/remove_picture_add_post.coffee"></script>
-		{% endcompress %}
-	</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-10">
+				<button type="submit" class="btn btn-default">Zapisz</button>
+			</div>
+		</div>
+	</form>
+	{% compress js %}
+		<script type="text/coffeescript" src="{{ STATIC_URL }}js/remove_picture_add_post.coffee"></script>
+	{% endcompress %}
 {% endblock %}
