@@ -33,7 +33,7 @@ def dimgem(request, view_name):
 
 
 def contact(request):
-    return render(request, 'kontakt.html')
+    return render(request, 'contact.html')
 
 
 class ShowPostView(ListView):
@@ -138,7 +138,7 @@ def register(request):
         redirect_url = reverse('home')
         return redirect(redirect_url)
 
-    return render(request, 'rejestracja.html', {'form': form})
+    return render(request, 'registration.html', {'form': form})
 
 
 def log_in(request):
