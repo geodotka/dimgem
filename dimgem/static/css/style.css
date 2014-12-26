@@ -72,11 +72,6 @@ a {
     display: inline-block;
 }
 
-.post-picture {
-    width: auto;
-    height: 300px;
-}
-
 .waiting-room .waiting-room-picture {
     text-align: center;
 }
@@ -86,10 +81,45 @@ a {
     height: 200px;
 }
 
+.container {
+    max-width: 900px;
+}
+
+.container-header {
+    color: darkgreen;
+}
+
+.container-picture img {
+    width: auto;
+    height: 300px;
+}
+
+.container-picture-votes {
+    display: inline;
+}
+
+.container-vote {
+    float: left;
+}
+
+.container-results {
+    float: right;
+}
+
+.container-message {
+    clear: right;
+    float: right;
+}
+
 h4 {
      color: darkgreen;
 }
 
 .outer-link {
      color: darkgreen;
+}
+
+.contact img {
+    width: auto;
+    height: 300px;
 }
