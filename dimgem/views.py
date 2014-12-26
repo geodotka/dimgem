@@ -109,16 +109,15 @@ def show_todays_posts(dimgem_type):
 
 
 def search(request):
-    if request.method == 'POST':
-        form = SearchingForm(request.POST)
-        posts = {}
-        if form.is_valid():
-            word = form.cleaned_data['word']
-            posts = Post.objects.filter(text__icontains=word, is_approved=True)
-            return render(request, 'search.html', {'form': form,
-                                                   'posts': posts,
-                                                   'word': word})
-    form = SearchingForm()
+    form = SearchingForm(request.POST or None)
+
+    if form.is_valid():
+        word = form.cleaned_data['word']
+        posts = Post.objects.filter(text__icontains=word, is_approved=True)
+        return render(request, 'search.html', {'form': form,
+                                               'posts': posts,
+                                               'word': word})
+
     return render(request, 'search.html', {'form': form})
 
 

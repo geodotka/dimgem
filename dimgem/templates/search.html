@@ -1,12 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
-	<br>
-	<form action="" method="post">
-		<table>
-		{{ form.as_table }}
-		</table>
+	<form method="post" class="form-horizontal" role="form">
 		{% csrf_token %}
-		<input type="submit" value="Szukaj">
+		<div class="form-group">
+			<label for="{{ form.word.id_for_label }}" class="col-sm-3 control-label">{{ form.word.label }}</label>
+			{{ form.word }}
+			{% if form.word.errors %}
+				{% for error in form.word.errors %}
+					<span class="text-error">{{ error }}</span>
+				{% endfor %}
+			{% endif %}
+		</div>
+		<div class="form-group">
+			<div>
+				<span class="col-sm-3"></span>
+				<button type="submit" class="btn btn-default">Szukaj</button>
+			</div>
+		</div>
 	</form>
 	{% if posts %}
 		{% for post in posts %}

@@ -3,7 +3,7 @@
 	<form method="post" class="form-horizontal" role="form">
 		{% csrf_token %}
 		<div>
-			<div class=class="form-group">
+			<div class="form-group">
 				<label for="{{ form.login.id_for_label }}" class="col-sm-2 control-label">{{ form.login.label }}</label>
 				{{ form.login }}
 				{% if form.login.errors %}
@@ -12,7 +12,7 @@
 					{% endfor %}
 				{% endif %}
 			</div>
-			<div class=class="form-group">
+			<div class="form-group">
 				<label for="{{ form.password.id_for_label }}" class="col-sm-2 control-label">{{ form.password.label }}</label>
 				{{ form.password }}
 				{% if form.password.errors %}
@@ -21,7 +21,7 @@
 					{% endfor %}
 				{% endif %}
 			</div>
-			<div class=class="form-group">
+			<div class="form-group">
 				<label for="{{ form.password2.id_for_label }}" class="col-sm-2 control-label">{{ form.password2.label }}</label>
 				{{ form.password2 }}
 				{% if form.password2.errors %}
@@ -30,7 +30,7 @@
 					{% endfor %}
 				{% endif %}
 			</div>
-			<div class=class="form-group">
+			<div class="form-group">
 				<label for="{{ form.email.id_for_label }}" class="col-sm-2 control-label">{{ form.email.label }}</label>
 				{{ form.email }}
 				{% if form.email.errors %}
