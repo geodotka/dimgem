@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 	<h3>One post a day, and life is OK.</h3>
-	{% if template_type == 'dim' %}
-		<h2>DIM - Dorothy's Italian Manual</h2>
+	<hr>
+	{% if view_name == 'dim' %}
+		<h3>DIM - Dorothy's Italian Manual</h3>
 		<ul>
 			<li>"dim light" - przyćmione światło</li>
 			<li>"dim voice" - słaby głos</li>
@@ -11,8 +12,8 @@
 			<li>"dim outlook" - marne widoki</li>
 		</ul>
 	{% endif %}
-	{% if template_type == 'gem' %}
-		<h2>GEM - George's English Manual</h2>
+	{% if view_name == 'gem' %}
+		<h3>GEM - George's English Manual</h3>
 		<ul>
 			<li>"gem" - kamień szlachetny</li>
 		</ul>
