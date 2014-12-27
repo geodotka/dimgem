@@ -56,3 +56,5 @@ class NoteToPost(models.Model):
     accept_date = models.DateField(null=True, blank=True)
     accept_superuser = models.ForeignKey(User, null=True, blank=True,
         related_name=u'superuser_corrected_post')
+    refusal_reason = models.TextField(null=True, blank=True)
+    is_refused = models.BooleanField(default=False)
