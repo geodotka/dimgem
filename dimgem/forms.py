@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.core.validators import MinLengthValidator
 
-from dimgem.models import Post, NoteToPost
+from .models import Post, NoteToPost
 
 
 class SearchingForm(forms.Form):
