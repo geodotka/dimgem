@@ -11,7 +11,8 @@ from django.views.generic import ListView
 from django.shortcuts import render, redirect
 
 from dimgem.const import DIM
-from dimgem.forms import SearchingForm, RegisterForm, LoginForm, AddNewPostForm
+from dimgem.forms import SearchingForm, RegisterForm, LoginForm,\
+    AddNewPostForm, ReportMistakeToPost
 from dimgem.models import Category, Post, Vote
 
 
@@ -51,11 +52,13 @@ class ShowPostView(ListView):
                 self.request.GET.get('post-id') and \
                 self.request.GET.get('vote'):
             votes = vote(self.request)
+        form = ReportMistakeToPost()
         context = {
             'template_type': self.template_type,
             'category_name': self.category_name,
             'view_name': self.view_name,
             'votes': votes,
+            'form': form,
         }
         return super(ShowPostView, self).get_context_data(**context)
 

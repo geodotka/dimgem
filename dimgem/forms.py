@@ -1,8 +1,9 @@
+from datetime import datetime
 from django import forms
 from django.contrib.auth.models import User
 from django.core.validators import MinLengthValidator
 
-from dimgem.models import Post
+from dimgem.models import Post, NoteToPost
 
 
 class SearchingForm(forms.Form):
@@ -58,3 +59,23 @@ class AddNewPostForm(forms.ModelForm):
             'categories': 'Kategoria',
             'picture': 'Obrazek',
         }
+
+
+class ReportMistakeToPost(forms.Form):
+    author = forms.CharField(label='autor', required=False)
+    email = forms.EmailField(label='e-mail', widget=forms.EmailInput)
+    text = forms.CharField(label='opis', widget=forms.Textarea)
+
+    def save(self, **kwargs):
+        post_id = self.cleaned_data['post_id']
+        post = Post.objects.get(pk=post_id)
+        email = self.cleaned_data['email']
+        text = self.cleaned_data['text']
+        note = NoteToPost.objects.create(post_id=post, email=email,
+            submited_date=datetime.now().date(), text=text, is_accepted=False)
+        user_id = self.cleaned_data.get('user_id')
+        if user_id:
+            note.author = User.objects.get(pk=user_id)
+        else:
+            note.anon_author = self.cleaned_data['author']
+        note.save()

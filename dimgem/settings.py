@@ -42,6 +42,9 @@ INSTALLED_APPS = (
     'dimgem',
     'south',
     'compressor',
+
+    # development
+    'debug_toolbar' if DEBUG else None,
 )
 
 MIDDLEWARE_CLASSES = (
@@ -51,6 +54,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware' if DEBUG else None,
 )
 
 ROOT_URLCONF = 'dimgem.urls'
@@ -110,3 +114,14 @@ STATIC_ROOT = join(_current_dir, 'static')
 MEDIA_ROOT = join(_current_dir, 'media')
 
 LOGIN_URL = '/login/'
+
+# setup debug_toolbar
+if DEBUG:
+    INTERNAL_IPS = ['127.0.0.1']
+
+    DEBUG_TOOLBAR_CONFIG = {
+        'INTERCEPT_REDIRECTS': False
+    }
+
+    DEBUG_TOOLBAR_PATCH_SETTINGS = False
+

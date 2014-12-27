@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+
+{% load compress %}
+
 {% block content %}
 	<h3>{{ template_type|upper }} &rsaquo; {{ category_name }}</h3>
 	{% if not posts %}
@@ -38,6 +41,51 @@
 					</div>
 				</div>
 			</div>
+			<div>
+				<button type="button" data-post-id="{{ post.id }}" class="btn btn-default js-show-form">Zgłoś błąd</button>
+			</div>
+			<div>
+				<form method="post" class="form-horizontal js-report-mistake-to-post-form" data-post-id="{{ post.id }}" role="form">
+					{% csrf_token %}
+					<div class="form-group">
+						<label for="{{ form.author.id_for_label }}" class="col-sm-2 control-label">{{ form.author.label }}</label>
+						{% if request.user.is_authenticated %}
+							<span class="js-author" data-user-id="{{ request.user.id }}">{{ request.user.username }}</span>
+						{% else %}
+							{{ form.author }}
+						{% endif %}
+						{% if form.author.errors %}
+							{% for error in form.author.errors %}
+								<span class="text-error">{{ error }}</span>
+							{% endfor %}
+						{% endif %}
+					</div>
+					<div class="form-group">
+						<label for="{{ form.email.id_for_label }}" class="col-sm-2 control-label">{{ form.email.label }}</label>
+						{{ form.email }}
+						{% if form.email.errors %}
+							{% for error in form.email.errors %}
+								<span class="text-error">{{ error }}</span>
+							{% endfor %}
+						{% endif %}
+					</div>
+					<div class="form-group">
+						<label for="{{ form.text.id_for_label }}" class="col-sm-2 control-label">{{ form.text.label }}</label>
+						{{ form.text }}
+						{% if form.text.errors %}
+							{% for error in form.text.errors %}
+								<span class="text-error">{{ error }}</span>
+							{% endfor %}
+						{% endif %}
+					</div>
+					<div>
+						<span class="col-sm-2"></span>
+						<button type="submit" class="js-report-mistake" data-post-id="{{ post.id }}">Zgłoś błąd</button>
+						<button class="js-cancel" data-post-id="{{ post.id }}">Anuluj</button>
+					</div>
+				</form>
+				<span class="js-note" data-post-id="{{ post.id }}"></span>
+			</div>
 		{% endfor %}
 		<div>
 		{% if is_paginated %}
@@ -58,4 +106,7 @@
 		{% endif %}
 		</div>
 	{% endif %}
+	{% compress js %}
+		<script type="text/coffeescript" src="{{ STATIC_URL }}js/report_mistake_to_post.coffee"></script>
+	{% endcompress %}
 {% endblock %}
