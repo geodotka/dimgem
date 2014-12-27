@@ -1,5 +1,6 @@
 from django.contrib import admin
-from dimgem.models import Category, Post, Vote
+from dimgem.models import Category, Post, Vote, NoteToPost
+
 
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'posted_date', 'author', 'text', 'dim',
@@ -8,3 +9,4 @@ class PostAdmin(admin.ModelAdmin):
 admin.site.register(Category)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Vote)
+admin.site.register(NoteToPost)

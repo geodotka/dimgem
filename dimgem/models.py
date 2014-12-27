@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -41,3 +42,17 @@ class Vote(models.Model):
     ip = models.IPAddressField()
     vote = models.BooleanField()
     post = models.ForeignKey(Post)
+
+
+class NoteToPost(models.Model):
+    post_id = models.ForeignKey(Post)
+    author = models.ForeignKey(User, null=True, blank=True,
+                               related_name=u'note_to_post')
+    anon_author = models.CharField(max_length=50, null=True, blank=True)
+    email = models.EmailField()
+    submited_date = models.DateField()
+    text = models.TextField(verbose_name=u'Treść')
+    is_accepted = models.BooleanField()
+    accept_date = models.DateField(null=True, blank=True)
+    accept_superuser = models.ForeignKey(User, null=True, blank=True,
+        related_name=u'superuser_corrected_post')
