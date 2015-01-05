@@ -43,7 +43,7 @@ a {
 }
 
 .menu-item-link {
-    width: 50px;
+    width: 100px;
     border-radius: 10px;
     margin: 20px 0px;
 }
@@ -122,4 +122,22 @@ h4 {
 .contact img {
     width: auto;
     height: 300px;
+}
+
+.post-column {
+    max-width: 170px;
+}
+
+.accept-or-refuse-column {
+    width: 200px;
+}
+
+.js-new-text {
+    max-width: 1980px;
+    position: relative;
+}
+
+.js-refusal-reason {
+    max-width: 190px;
+    position: relative;
 }

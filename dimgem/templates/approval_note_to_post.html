@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% load compress %}
+
+{% block content %}
+	<div class="waiting-room">
+		<ul class="nav nav-tabs" role="tablist">
+			<li role="presentation" class="js-tab active"><a href="#dim" id="dim-tab" aria-controls="dim" role="tab" data-toggle="tab">DIM</a></li>
+			<li role="presentation" class="js-tab"><a href="#gem" id="gem-tab" aria-controls="gem" role="tab" data-toggle="tab">GEM</a></li>
+		</ul>
+		<div id="myTabContent" class="tab-content">
+			<div role="tabpanel" class="tab-pane fade in active" id="dim">
+				{% if not notes_dim %}
+					Brak zgłoszonych uwag do postów
+				{% else %}
+					<table class="table table-condensed table-bordered">
+						<tr>
+							<th class="text-center post-column">Post</th>
+							<th class="text-center">Link do posta</th>
+							<th class="text-center">Autor uwagi</th>
+							<th class="text-center">e-mail</th>
+							<th class="text-center">Data zgłoszenia</th>
+							<th class="text-center">Treść</th>
+							<th class="text-center accept-or-refuse-column">Akceptuj/Odrzuć</th>
+						</tr>
+						{% for note in notes_dim %}
+							{% include "approval_notes_table.html" %}
+						{% endfor %}
+					</table>
+				{% endif %}
+			</div>
+
+			<div role="tabpanel" class="tab-pane fade" id="gem">
+				{% if not notes_gem %}
+					Brak zgłoszonych uwag do postów
+				{% else %}
+					<table class="table table-condensed table-bordered">
+						<tr>
+							<th class="text-center post-column">Post</th>
+							<th class="text-center">Link do posta</th>
+							<th class="text-center">Autor uwagi</th>
+							<th class="text-center">e-mail</th>
+							<th class="text-center">Data zgłoszenia</th>
+							<th class="text-center">Treść</th>
+							<th class="text-center accept-or-refuse-column">Akceptuj/Odrzuć</th>
+						</tr>
+						{% for note in notes_gem %}
+							{% include "approval_notes_table.html" %}
+						{% endfor %}
+					</table>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+	{% compress js %}
+		<script type="text/coffeescript" src="{{ STATIC_URL }}js/accept_or_refuse_note_to_post.coffee"></script>
+	{% endcompress %}
+{% endblock %}

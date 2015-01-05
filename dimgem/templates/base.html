@@ -55,10 +55,22 @@
 							<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'gem_false_friends' %}">False friends</a></li>
 						</ul>
 					</div>
-					<a class="btn btn-success menu-item" role="button" href="{% url 'waiting_room' %}">Poczekalnia</a>
+					<div class="btn-group">
+						<span class="btn btn-success menu-item">Post office</span>
+						<button type="button" class="btn btn-success dropdown-toggle menu-item-button" data-toggle="dropdown" aria-expanded="false">
+							<span class="caret"></span>
+							<span class="sr-only">Toggle Dropdown</span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'waiting_room' %}">Poczekalnia</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'add_post' %}">Dodaj post</a></li>
+							{% if request.user.is_superuser %}
+								<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'approve_note_to_post' %}">Uwagi</a></li>
+							{% endif %}
+						</ul>
+					</div>
 					<a class="btn btn-success menu-item" role="button" href="{% url 'search' %}">Szukaj</a>
 					<a class="btn btn-success menu-item" role="button" href="{% url 'contact' %}">Kontakt</a>
-					<a class="btn btn-success menu-item" role="button" href="{% url 'add_post' %}">Dodaj post</a>
 					{% if not request.user.is_authenticated %}
 						<a class="btn btn-success menu-item" role="button" href="{% url 'log_in' %}?next={{request.path}}">Zaloguj</a>
 					{% else %}

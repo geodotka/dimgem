@@ -60,4 +60,6 @@ urlpatterns = patterns('dimgem.views.frontend',
     url(r'^logout/$', 'log_out', name='log_out'),
     url(r'^dodaj_post/$', 'add_post', name='add_post'),
     url(r'^poczekalnia/$', 'waiting_room', name='waiting_room'),
+    url(r'^uwagi_do_postow/$', 'approve_note_to_post',
+        name='approve_note_to_post'),
 )

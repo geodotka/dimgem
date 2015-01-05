@@ -45,6 +45,13 @@ class Vote(models.Model):
 
 
 class NoteToPost(models.Model):
+    """
+    if is_accepted == False, note is not seen by superuser
+    if is_accepted == True and is_refused == False, note is seen and accpeted
+        by superuser
+    if is_accepted == True and is_refused == True, note is seen and refused
+        by superuser
+    """
     post_id = models.ForeignKey(Post)
     author = models.ForeignKey(User, null=True, blank=True,
                                related_name=u'note_to_post')

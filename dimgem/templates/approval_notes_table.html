@@ -1,0 +1,45 @@
+<tr class="js-note-row" data-note-id="{{ note.id }}">
+	<td class="post-column">
+		<dl>
+			<dt>Kategoria:</dt><dd>{{ note.post_id.categories }}</dd>
+			<dt>Tytuł:</dt><dd>{{ note.post_id.title }}</dd>
+			<dt>Autor:</dt><dd>{{ note.post_id.author }}</dd>
+			<dt>Treść:</dt><dd>{{ note.post_id.text }}</dd>
+		</dl>
+	</td>
+	<td class="text-center">-</td>
+	<td class="text-center">
+		{% if note.author %}
+			{{ note.author }}
+		{% else %}
+			{{ note.anon_author }}
+		{% endif %}
+	</td>
+	<td class="text-center">{{ note.email }}</td>
+	<td class="text-center">{{ note.submited_date|date:"d.m.Y" }}</td>
+	<td class="text-justify">{{ note.text }}</td>
+	<td class="accept-or-refuse-column text-center">
+
+		<div class="form-group">
+			<div><button type="button" class="js-accept-note" data-note-id="{{ note.id }}">Zaakceptuj uwagę</button></div>
+			<form method="post" class="form-horizontal js-accept-note-to-post-form" data-note-id="{{ note.id }}" role="form">
+				{% csrf_token %}
+				<div><label class="control-label js-accept-note-label" data-note-id="{{ note.id }}">{{ accept_form.new_text.label }}</label></div>
+				<div><textarea class="form-control js-new-text" data-note-id="{{ note.id }}" id="id_new_text"></textarea></div>
+				<div><span class="js-text-accept-error" data-note-id="{{ note.id }}"></span></div>
+				<div><button type="submit" class="js-accept-note-ok" data-note-id="{{ note.id }}">OK</button></div>
+			</form>
+		</div>
+		<div class="form-group">
+			<div><button type="button" class="js-refuse-note" data-note-id="{{ note.id }}">Odrzuć uwagę</button></div>
+			<form method="post" class="form-horizontal js-refuse-note-to-post-form" data-note-id="{{ note.id }}" role="form">
+				{% csrf_token %}
+				<div><label class="control-label js-refuse-note-label" data-note-id="{{ note.id }}">{{ refuse_form.refusal_reason.label }}</label></div>
+				<div><textarea class="form-control js-refusal-reason" data-note-id="{{ note.id }}" id="id_refusal_reason"></textarea></div>
+				<div><span class="js-text-refuse-error" data-note-id="{{ note.id }}"></span></div>
+				<div><button type="submit" class="js-refuse-note-ok" data-note-id="{{ note.id }}">OK</button></div>
+			</form>
+		</div>
+		<div><button type="button" class="js-cancel" data-note-id="{{ note.id }}">Anuluj</button></div>
+	</td>
+</tr>

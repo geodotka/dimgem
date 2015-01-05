@@ -9,8 +9,8 @@ class PostAdmin(admin.ModelAdmin):
 
 class NoteToPostAdmin(admin.ModelAdmin):
     list_display = ('post_id', 'author', 'anon_author', 'text',
-                    'submited_date', 'is_accepted', 'accept_date',
-                    'accept_superuser')
+                    'submited_date', 'is_accepted', 'is_refused',
+                    'accept_date', 'accept_superuser')
 
 
 admin.site.register(Category)

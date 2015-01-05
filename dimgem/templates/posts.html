@@ -53,30 +53,18 @@
 							<span class="js-author" data-user-id="{{ request.user.id }}">{{ request.user.username }}</span>
 						{% else %}
 							{{ form.author }}
-						{% endif %}
-						{% if form.author.errors %}
-							{% for error in form.author.errors %}
-								<span class="text-error">{{ error }}</span>
-							{% endfor %}
+							<span class="js-form-author-error" data-post-id="{{ post.id }}"></span>
 						{% endif %}
 					</div>
 					<div class="form-group">
 						<label for="{{ form.email.id_for_label }}" class="col-sm-2 control-label">{{ form.email.label }}</label>
 						{{ form.email }}
-						{% if form.email.errors %}
-							{% for error in form.email.errors %}
-								<span class="text-error">{{ error }}</span>
-							{% endfor %}
-						{% endif %}
+						<span class="js-form-email-error" data-post-id="{{ post.id }}"></span>
 					</div>
 					<div class="form-group">
 						<label for="{{ form.text.id_for_label }}" class="col-sm-2 control-label">{{ form.text.label }}</label>
 						{{ form.text }}
-						{% if form.text.errors %}
-							{% for error in form.text.errors %}
-								<span class="text-error">{{ error }}</span>
-							{% endfor %}
-						{% endif %}
+						<span class="js-form-text-error" data-post-id="{{ post.id }}"></span>
 					</div>
 					<div>
 						<span class="col-sm-2"></span>

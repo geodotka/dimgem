@@ -2,18 +2,19 @@
 # encoding: utf-8
 
 import datetime
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-
 from django.views.generic import ListView
 from django.shortcuts import render, redirect
 
-from dimgem.const import DIM
-from dimgem.forms import SearchingForm, RegisterForm, LoginForm,\
-    AddNewPostForm, ReportMistakeToPost
-from dimgem.models import Category, Post, Vote
+from ..const import DIM
+from ..forms import SearchingForm, RegisterForm, LoginForm,\
+    AddNewPostForm, ReportMistakeToPost, AcceptNoteToPostForm,\
+    RefuseNoteToPostForm
+from ..models import Category, Post, Vote, NoteToPost
 
 
 def home(request):
@@ -234,3 +235,19 @@ def waiting_room(request):
                                                 categories=false_friends_id),
     }
     return render(request, 'waiting_room.html', context)
+
+
+def approve_note_to_post(request):
+    notes = NoteToPost.objects.filter(is_accepted=False)
+    notes_dim = notes.filter(post_id__dim=True)
+    notes_gem = notes.filter(post_id__dim=False)
+    accept_form = AcceptNoteToPostForm(request.POST or None)
+    refuse_form = RefuseNoteToPostForm(request.POST or None)
+
+    context = {
+        'notes_dim': notes_dim,
+        'notes_gem': notes_gem,
+        'accept_form': accept_form,
+        'refuse_form': refuse_form,
+    }
+    return render(request, 'approval_note_to_post.html', context)
