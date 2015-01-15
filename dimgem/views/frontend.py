@@ -135,6 +135,7 @@ def register(request):
 
         user = User.objects.create_user(username=username, email=email)
         user.set_password(password)
+        user.backend = 'django.contrib.auth.backends.ModelBackend'
         user.save()
         login(request, user)
 
