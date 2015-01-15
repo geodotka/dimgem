@@ -5,7 +5,7 @@
 	<td>{{post.text|linebreaks}}</td>
 	<td class="waiting-room-picture">
 		{% if post.picture %}
-			<img src="{{ MEDIA_URL }}{{ post.picture.name }}" alt="{{ post.picture.name }}" />
+			<img class="js-resized-picture" src="{{ MEDIA_URL }}{{ post.picture.name }}" alt="{{ post.picture.name }}" />
 		{% else %}
 			-
 		{% endif %}

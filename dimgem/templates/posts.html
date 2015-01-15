@@ -19,7 +19,7 @@
 				</div>
 				{% if post.picture %}
 					<div class="container-picture">
-						<img src="{{ MEDIA_URL }}{{ post.picture.name }}" alt="{{ post.picture.name }}" />
+						<img class="js-resized-picture" data-post-picture="picture" src="{{ MEDIA_URL }}{{ post.picture.name }}" alt="{{ post.picture.name }}" />
 					</div>
 				{% endif %}
 				<div class="container-picture-votes">
@@ -96,5 +96,6 @@
 	{% endif %}
 	{% compress js %}
 		<script type="text/coffeescript" src="{{ STATIC_URL }}js/report_mistake_to_post.coffee"></script>
+		<script type="text/coffeescript" src="{{ STATIC_URL }}js/preview_picture.coffee"></script>
 	{% endcompress %}
 {% endblock %}

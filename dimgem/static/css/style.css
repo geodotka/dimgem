@@ -9,8 +9,10 @@ a {
 
 .wrapper {
     max-width: 900px;
-    margin : 0 auto;
-    display : block;
+    min-height: 1000px;
+    margin: 0 auto;
+    display: block;
+    position: relative;
 }
 
 .baner img {
@@ -18,8 +20,8 @@ a {
     height: auto;
     border-radius: 40px;
     box-shadow: 0 0 7px black;
-    margin-top : 10px;
-    margin-bottom : 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .menu {
@@ -55,13 +57,14 @@ a {
 }
 
 .content {
-    margin-top : 10px;
-    margin-bottom : 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .footer {
-    position:relative;
-    bottom:0;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
 }
 
 .btn-success {
@@ -140,4 +143,24 @@ h4 {
 .js-refusal-reason {
     max-width: 190px;
     position: relative;
+}
+
+.js-resized-picture {
+    max-height: 60px;
+}
+
+#preview{
+    position: absolute;
+    border: 1px solid #ccc;
+    background: #333;
+    padding: 5px;
+    display: none;
+    color: #fff;
+    max-height: 300px;
+    max-width: 300px;
+}
+
+.picture-previev {
+    max-height: 300px;
+    max-width: 300px;
 }
