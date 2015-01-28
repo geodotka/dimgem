@@ -187,6 +187,11 @@ def add_post(request):
     else:
         author = user
 
+    try:
+        picture = request.FILES['picture']
+    except KeyError:
+        picture = None
+
     if form.is_valid():
         data_dict = {
             'title': form.cleaned_data['title'],
@@ -195,7 +200,7 @@ def add_post(request):
             'text': form.cleaned_data['text'],
             'dim': form.cleaned_data['dim'],
             'categories': form.cleaned_data['categories'],
-            'picture': request.FILES['picture'],
+            'picture': picture,
             'is_approved': False,
         }
         iter_dict = data_dict.copy()
