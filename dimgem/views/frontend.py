@@ -201,7 +201,8 @@ def add_post(request):
             'dim': form.cleaned_data['dim'],
             'categories': form.cleaned_data['categories'],
             'picture': picture,
-            'is_approved': False,
+            # if post is added by superuser it doesn't go to the waiting room
+            'is_approved': request.user.is_superuser,
         }
         iter_dict = data_dict.copy()
         for k, v in iter_dict.items():
