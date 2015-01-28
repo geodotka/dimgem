@@ -1,80 +1,82 @@
 # -*- coding: utf-8 -*-
-from south.utils import datetime_utils as datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+from __future__ import unicode_literals
+
+from django.db import models, migrations
+from django.conf import settings
 
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
-        # Adding model 'Category'
-        db.create_table('dimgem_category', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=30)),
-            ('icon', self.gf('django.db.models.fields.files.ImageField')(max_length=100, blank=True)),
-        ))
-        db.send_create_signal('dimgem', ['Category'])
+    dependencies = [
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+    ]
 
-        # Adding model 'Post'
-        db.create_table('dimgem_post', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=255)),
-            ('posted_date', self.gf('django.db.models.fields.DateField')()),
-            ('author', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('text', self.gf('django.db.models.fields.TextField')()),
-            ('dim', self.gf('django.db.models.fields.BooleanField')()),
-            ('categories', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['dimgem.Category'])),
-            ('old_text', self.gf('django.db.models.fields.TextField')(null=True)),
-        ))
-        db.send_create_signal('dimgem', ['Post'])
-
-        # Adding model 'Vote'
-        db.create_table('dimgem_vote', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('ip', self.gf('django.db.models.fields.IPAddressField')(max_length=15)),
-            ('vote', self.gf('django.db.models.fields.BooleanField')()),
-            ('post', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['dimgem.Post'])),
-        ))
-        db.send_create_signal('dimgem', ['Vote'])
-
-
-    def backwards(self, orm):
-        # Deleting model 'Category'
-        db.delete_table('dimgem_category')
-
-        # Deleting model 'Post'
-        db.delete_table('dimgem_post')
-
-        # Deleting model 'Vote'
-        db.delete_table('dimgem_vote')
-
-
-    models = {
-        'dimgem.category': {
-            'Meta': {'object_name': 'Category'},
-            'icon': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '30'})
-        },
-        'dimgem.post': {
-            'Meta': {'object_name': 'Post', 'ordering': "['-posted_date']"},
-            'author': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'categories': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['dimgem.Category']"}),
-            'dim': ('django.db.models.fields.BooleanField', [], {}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'old_text': ('django.db.models.fields.TextField', [], {'null': 'True'}),
-            'posted_date': ('django.db.models.fields.DateField', [], {}),
-            'text': ('django.db.models.fields.TextField', [], {}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '255'})
-        },
-        'dimgem.vote': {
-            'Meta': {'object_name': 'Vote'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'ip': ('django.db.models.fields.IPAddressField', [], {'max_length': '15'}),
-            'post': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['dimgem.Post']"}),
-            'vote': ('django.db.models.fields.BooleanField', [], {})
-        }
-    }
-
-    complete_apps = ['dimgem']
+    operations = [
+        migrations.CreateModel(
+            name='Category',
+            fields=[
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
+                ('name', models.CharField(max_length=30)),
+                ('icon', models.ImageField(blank=True, verbose_name='Ikonka Kategorii', upload_to='icons')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='NoteToPost',
+            fields=[
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
+                ('anon_author', models.CharField(blank=True, max_length=50, null=True)),
+                ('email', models.EmailField(max_length=75)),
+                ('submited_date', models.DateField()),
+                ('text', models.TextField(verbose_name='Treść')),
+                ('is_accepted', models.BooleanField(default=None)),
+                ('accept_date', models.DateField(blank=True, null=True)),
+                ('refusal_reason', models.TextField(blank=True, null=True)),
+                ('is_refused', models.BooleanField(default=False)),
+                ('accept_superuser', models.ForeignKey(blank=True, null=True, to=settings.AUTH_USER_MODEL, related_name='superuser_corrected_post')),
+                ('author', models.ForeignKey(blank=True, null=True, to=settings.AUTH_USER_MODEL, related_name='note_to_post')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Post',
+            fields=[
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
+                ('title', models.CharField(max_length=255)),
+                ('posted_date', models.DateField()),
+                ('author', models.CharField(max_length=50)),
+                ('text', models.TextField()),
+                ('dim', models.BooleanField(default=None)),
+                ('old_text', models.TextField(blank=True, null=True)),
+                ('picture', models.ImageField(blank=True, upload_to='post_pictures', null=True)),
+                ('is_approved', models.BooleanField(default=True)),
+                ('categories', models.ForeignKey(to='dimgem.Category')),
+            ],
+            options={
+                'ordering': ['-posted_date'],
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Vote',
+            fields=[
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
+                ('ip', models.IPAddressField()),
+                ('vote', models.BooleanField(default=None)),
+                ('post', models.ForeignKey(to='dimgem.Post')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.AddField(
+            model_name='notetopost',
+            name='post_id',
+            field=models.ForeignKey(to='dimgem.Post'),
+            preserve_default=True,
+        ),
+    ]

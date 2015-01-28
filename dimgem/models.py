@@ -16,7 +16,7 @@ class Post(models.Model):
     posted_date = models.DateField()
     author = models.CharField(max_length=50)
     text = models.TextField()
-    dim = models.BooleanField()
+    dim = models.BooleanField(default=None)
     categories = models.ForeignKey(Category)
     old_text = models.TextField(null=True, blank=True)
     picture = models.ImageField(
@@ -40,7 +40,7 @@ class Post(models.Model):
 
 class Vote(models.Model):
     ip = models.IPAddressField()
-    vote = models.BooleanField()
+    vote = models.BooleanField(default=None)
     post = models.ForeignKey(Post)
 
 
@@ -59,7 +59,7 @@ class NoteToPost(models.Model):
     email = models.EmailField()
     submited_date = models.DateField()
     text = models.TextField(verbose_name=u'Treść')
-    is_accepted = models.BooleanField()
+    is_accepted = models.BooleanField(default=None)
     accept_date = models.DateField(null=True, blank=True)
     accept_superuser = models.ForeignKey(User, null=True, blank=True,
         related_name=u'superuser_corrected_post')
