@@ -60,6 +60,10 @@ class AddNewPostForm(forms.ModelForm):
             'picture': 'Obrazek',
         }
 
+    def __init__(self, *args, **kwargs):
+        super(AddNewPostForm, self).__init__(*args, **kwargs)
+        self.fields['categories'].empty_label = None
+
 
 class ReportMistakeToPost(forms.Form):
     author = forms.CharField(label='autor', required=False)
