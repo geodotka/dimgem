@@ -165,3 +165,7 @@ h4 {
     max-height: 300px;
     max-width: 300px;
 }
+
+.searched-word{
+    background: #FFFF00;
+}

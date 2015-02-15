@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% load dimgem_filters %}
+{% load compress %}
+
 {% block content %}
 	<form method="post" class="form-horizontal" role="form">
 		{% csrf_token %}
@@ -21,8 +24,10 @@
 	{% if posts %}
 		{% for post in posts %}
 			<hr>
-			<h4>{{post.posted_date|date:"d.m.Y"}} {{post.author}}: {{post.title}}</h4>
-			<p>{{post.text|linebreaks}}</p>
+			<h4>{{ post.posted_date|date:"d.m.Y" }} {{ post.author }}: {{ post.title }}</h4>
+			{% autoescape off %}
+				<p>{{ post.text|linebreaks|color_searched_word:word }}</p>
+			{% endautoescape %}
 		{% endfor %}
 	{% else %}
 		{% if word %}
