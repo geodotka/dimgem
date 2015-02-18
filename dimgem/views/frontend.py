@@ -10,7 +10,7 @@ from django.core.urlresolvers import reverse
 from django.views.generic import ListView
 from django.shortcuts import render, redirect
 
-from ..const import DIM
+from ..const import DIM, PAGINATE_BY
 from ..forms import SearchingForm, RegisterForm, LoginForm,\
     AddNewPostForm, ReportMistakeToPost, AcceptNoteToPostForm,\
     RefuseNoteToPostForm
@@ -40,7 +40,7 @@ def contact(request):
 
 class ShowPostView(ListView):
     model = Post
-    paginate_by = 10
+    paginate_by = PAGINATE_BY
     template_type = ''
     category_name = ''
     view_name = ''

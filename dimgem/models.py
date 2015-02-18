@@ -1,5 +1,8 @@
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.db import models
+
+from .const import DIM, GEM, PAGINATE_BY
 
 
 class Category(models.Model):
@@ -24,7 +27,7 @@ class Post(models.Model):
     is_approved = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ['-posted_date']
+        ordering = ['-id']
 
     def __str__(self):
         return self.title
@@ -36,6 +39,42 @@ class Post(models.Model):
     @property
     def votes_down(self):
         return Vote.objects.filter(post=self, vote=False).count()
+
+    @property
+    def url(self):
+
+        dct = {
+            'dim': {
+                'Gramatyka': 'dim_grammar',
+                'Słownictwo': 'dim_vocabulary',
+                'Ciekawostki': 'dim_curiosities',
+                'False friends': 'dim_false_friends'
+            },
+            'gem': {
+                'Gramatyka': 'gem_grammar',
+                'Słownictwo': 'gem_vocabulary',
+                'Ciekawostki': 'gem_curiosities',
+                'False friends': 'gem_false_friends'
+            }
+        }
+        dimgem_type = DIM if self.dim else GEM
+        category = self.categories.name
+        view_name = dct[dimgem_type][category]
+
+        url = reverse(view_name)
+        dim = True if dimgem_type == DIM else False
+        posts = Post.objects.filter(dim=dim, categories__name=category,
+                                    is_approved=True, id__gte=self.id)
+        number_of_posts_lte_self = posts.count()
+        paginate_by = PAGINATE_BY
+        page_number = number_of_posts_lte_self // paginate_by
+        if number_of_posts_lte_self % paginate_by != 0:
+            page_number += 1
+        if page_number == 1:
+            url += '#{}'.format(self.id)
+        else:
+            url += '?page={}#{}'.format(page_number, self.id)
+        return url
 
 
 class Vote(models.Model):

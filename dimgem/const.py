@@ -3,3 +3,5 @@
 
 DIM = 'dim'
 GEM = 'gem'
+
+PAGINATE_BY = 10

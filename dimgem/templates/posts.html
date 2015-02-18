@@ -12,10 +12,10 @@
 			<div class="container">
 				<hr>
 				<div class="container-header">
-					{{post.posted_date|date:"d.m.Y"}} {{post.author}}: {{post.title}}
+					{{ post.posted_date|date:"d.m.Y" }} {{ post.author }}: <a class="js-anchor" data-post-id="{{ post.id }}" href="#{{ post.id }}">{{ post.title }}</a>
 				</div>
 				<div class="container-text">
-					{{post.text|linebreaks}}
+					{{ post.text|linebreaks }}
 				</div>
 				{% if post.picture %}
 					<div class="container-picture">
@@ -97,5 +97,6 @@
 	{% compress js %}
 		<script type="text/coffeescript" src="{{ STATIC_URL }}js/report_mistake_to_post.coffee"></script>
 		<script type="text/coffeescript" src="{{ STATIC_URL }}js/preview_picture.coffee"></script>
+		<script type="text/coffeescript" src="{{ STATIC_URL }}js/add_anchor_to_post.coffee"></script>
 	{% endcompress %}
 {% endblock %}
