@@ -117,10 +117,21 @@ def search(request):
 
     if form.is_valid():
         word = form.cleaned_data['word']
-        posts = Post.objects.filter(text__icontains=word, is_approved=True)
-        return render(request, 'search.html', {'form': form,
-                                               'posts': posts,
-                                               'word': word})
+        whole_word = form.cleaned_data['whole_word']
+        context = {}
+        if whole_word:
+            posts = Post.objects.filter(text__iregex=r'\b(' + word + r')\b',
+                                        is_approved=True)
+            context.update({'filter': (word, True)})
+        else:
+            posts = Post.objects.filter(text__icontains=word, is_approved=True)
+            context.update({'filter': (word, False)})
+        context.update({
+            'form': form,
+            'word': word,
+            'posts': posts
+        })
+        return render(request, 'search.html', context)
 
     return render(request, 'search.html', {'form': form})
 

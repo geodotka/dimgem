@@ -8,6 +8,7 @@ from .models import Post, NoteToPost
 
 class SearchingForm(forms.Form):
     word = forms.CharField(label='Wpisz szukaną frazę')
+    whole_word = forms.BooleanField(required=False)
 
 
 class RegisterForm(forms.Form):

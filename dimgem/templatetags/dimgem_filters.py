@@ -11,8 +11,12 @@ register = template.Library()
 
 @register.filter(name='color_searched_word')
 def color_searched_word(value, arg):
-    arg_list = [arg, arg.lower(), arg.upper(), arg.capitalize()]
-    for argument in arg_list:
-        value = re.sub(argument, '<span class="searched-word">{}</span>'
-                       .format(argument), value)
-    return value
+    word = arg[0]
+    is_whole_word = arg[1]
+    if is_whole_word:
+        pattern = re.compile(r'\b(' + word + r')\b', flags=(re.I | re.U))
+    else:
+        pattern = re.compile(r'(' + word + r')', flags=(re.I | re.U))
+    repl = r'<span class="searched-word">\1</span>'
+
+    return re.sub(pattern, repl, value)
