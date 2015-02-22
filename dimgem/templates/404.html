@@ -2,7 +2,13 @@
 {% load compress %}
 
 {% block content %}
-	<div>
-		<h2>Psikus! Strona o podanym adresie nie istnieje!</h2>
+	<div class="text-center">
+		<div>
+			<h3>Psikus! Strona o podanym adresie nie istnieje!</h3>
+		</div>
+		<div>
+			{% load static from staticfiles %}
+			<img src="{% static 'dimgem/lol.JPG' %}" />
+		</div>
 	</div>
 {% endblock %}
