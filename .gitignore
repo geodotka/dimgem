@@ -4,3 +4,4 @@ media
 *.sqlite3
 CACHE
 __pycache__
+local_settings.py

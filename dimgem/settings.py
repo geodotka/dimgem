@@ -22,12 +22,9 @@ _current_dir = dirname(realpath(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'udf$-_c)+f)3dni51&)_(07)yx$3tr%%*m=h)euto8na^r-zps'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,9 +38,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'dimgem',
     'compressor',
-
-    # development
-    'debug_toolbar' if DEBUG else None,
 )
 
 MIDDLEWARE_CLASSES = (
@@ -53,7 +47,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware' if DEBUG else None,
 )
 
 ROOT_URLCONF = 'dimgem.urls'
@@ -114,13 +107,7 @@ MEDIA_ROOT = join(_current_dir, 'media')
 
 LOGIN_URL = '/login/'
 
-# setup debug_toolbar
-if DEBUG:
-    INTERNAL_IPS = ['127.0.0.1']
-
-    DEBUG_TOOLBAR_CONFIG = {
-        'INTERCEPT_REDIRECTS': False
-    }
-
-    DEBUG_TOOLBAR_PATCH_SETTINGS = False
-
+try:
+    from .local_settings import *
+except ImportError as e:
+    pass
