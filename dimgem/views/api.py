@@ -2,6 +2,9 @@
 # encoding: utf-8
 
 from annoying.decorators import ajax_request
+from dimgem.const import DIM
+
+from ..models import Post
 from ..forms import ReportMistakeToPost, AcceptNoteToPostForm, \
     RefuseNoteToPostForm
 
@@ -62,3 +65,26 @@ def get_result_of_accepting_or_refusing_note_to_post(request, form):
         result['errors'] = form.errors
 
     return result
+
+
+@ajax_request
+def show_newest_post(request):
+    category = request.POST.get('category')
+    dim = request.POST.get('dim')
+    dim = True if dim == DIM else False
+    try:
+        post = Post.objects.filter(is_approved=True,
+            dim=dim, categories__name=category).order_by('-id')[0]
+    except IndexError:
+        post = None
+    if post:
+        return {
+            'date': str(post.posted_date.strftime('%d.%m.%Y')),
+            'author': post.author,
+            'url': post.url,
+            'title': post.title,
+            'text': post.text,
+            'success': True
+        }
+    else:
+        return {'success': False}

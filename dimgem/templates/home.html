@@ -1,4 +1,78 @@
 {% extends "base.html" %}
+{% load compress %}
+
 {% block content %}
-	Cześć!
+	<div>
+		<p>Proszę o wyrozumiałość co do wyglądu. Małymi kroczkami.</p>
+		<h4>Najświeższa dawka postów:</h4>
+	</div>
+	<div class="content-shelf col-xs-6">
+		<div class="content__head"></div>
+		<div class="text-center">
+			<h2>DIM</h2>
+		</div>
+		<div class="js-shelf shelf text-center">
+			<div class="js-drawer-inside drawer-inside"></div>
+			<div class="js-drawer-door up" data-category="Gramatyka" data-type="dim">
+				<div class="door">Gramatyka</div>
+			</div>
+		</div>
+		<div class="js-shelf shelf text-center">
+			<div class="js-drawer-inside drawer-inside"></div>
+			<div class="js-drawer-door up" data-category="Słownictwo" data-type="dim">
+				<div class="door">Słownictwo</div>
+			</div>
+		</div>
+		<div class="js-shelf shelf text-center">
+			<div class="js-drawer-inside drawer-inside"></div>
+			<div class="js-drawer-door up" data-category="Ciekawostki" data-type="dim">
+				<div class="door">Ciekawostki</div>
+			</div>
+		</div>
+		<div class="js-shelf shelf text-center">
+			<div class="js-drawer-inside drawer-inside"></div>
+			<div class="js-drawer-door up" data-category="False" data-type="dim">
+				<div class="door">False  friends</div>
+			</div>
+		</div>
+	</div>
+	<div class="content-shelf col-xs-6">
+		<div class="content__head"></div>
+		<div class="text-center">
+			<h2>GEM</h2>
+		</div>
+		<div class="js-shelf shelf text-center">
+			<div class="js-drawer-inside drawer-inside"></div>
+			<div class="js-drawer-door up" data-category="Gramatyka" data-type="gem">
+				<div class="door">Gramatyka</div>
+			</div>
+		</div>
+		<div class="js-shelf shelf text-center">
+			<div class="js-drawer-inside drawer-inside"></div>
+			<div class="js-drawer-door up" data-category="Słownictwo" data-type="gem">
+				<div class="door">Słownictwo</div>
+			</div>
+		</div>
+		<div class="js-shelf shelf text-center">
+			<div class="js-drawer-inside drawer-inside"></div>
+			<div class="js-drawer-door up" data-category="Ciekawostki" data-type="gem">
+				<div class="door">Ciekawostki</div>
+			</div>
+		</div>
+		<div class="js-shelf shelf text-center">
+			<div class="js-drawer-inside drawer-inside"></div>
+			<div class="js-drawer-door up" data-category="False" data-type="gem">
+				<div class="door">False friends</div>
+			</div>
+		</div>
+	</div>
+	{% compress js %}
+		<script type="text/coffeescript" src="{{ STATIC_URL }}js/show_last_post.coffee"></script>
+	{% endcompress %}
+{% endblock %}
+{% block footer %}
+	<div class="footer-home col-xs-12">
+		<hr>
+		<p>Copyright by geodotka 2014. Made in Poland by geodotka. Nie wszystko jest made in China.</p>
+	</div>
 {% endblock %}

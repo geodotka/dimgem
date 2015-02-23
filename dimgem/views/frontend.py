@@ -17,7 +17,7 @@ from ..forms import SearchingForm, RegisterForm, LoginForm,\
 from ..models import Category, Post, Vote, NoteToPost
 
 
-def home(request):
+def show_home_page(request):
     return render(request, 'home.html')
 
 

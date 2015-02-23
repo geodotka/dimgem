@@ -8,7 +8,7 @@ from ..views.frontend import ShowPostView, show_alphabetical_posts_list
 
 
 urlpatterns = patterns('dimgem.views.frontend',
-    url(r'^$', 'home', name='home'),
+    url(r'^$', 'show_home_page', name='home'),
     url(r'^dim/$', 'dimgem', {'view_name': DIM}, name=DIM),
     url(r'^gem/$', 'dimgem', {'view_name': GEM}, name=GEM),
     url(r'^dim/gramatyka/$',

@@ -92,12 +92,12 @@
 		<div class="content">
 			{% block content %}{% endblock %}
 		</div>
-		<div class="footer">
-			{% block footer %}
+		{% block footer %}
+			<div class="footer">
 				<hr>
 				<p>Copyright by geodotka 2014. Made in Poland by geodotka. Nie wszystko jest made in China.</p>
-			{% endblock %}
-		</div>
+			</div>
+		{% endblock %}
 	</div>
 </body>
 </html>
