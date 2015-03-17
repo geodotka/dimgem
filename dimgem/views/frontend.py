@@ -269,3 +269,20 @@ def approve_note_to_post(request):
         'refuse_form': refuse_form,
     }
     return render(request, 'approval_note_to_post.html', context)
+
+
+def show_alphabetical_posts_list(request):
+
+    posts = Post.objects.all().order_by('title')
+    selected_choice = request.GET.get('choice')
+    if selected_choice and selected_choice != 'all':
+        dim = selected_choice == DIM
+        posts = posts.filter(dim=dim)
+    if not selected_choice:
+        selected_choice = 'all'
+
+    context = {
+        'posts': posts,
+        'choice': selected_choice
+    }
+    return render(request, 'show_alphabetical_posts_list.html', context)

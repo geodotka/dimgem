@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+	{% if not posts %}
+		<p>W bazie nie ma postów.</p>
+	{% else %}
+		<form action="{% url 'show_alphabetical_posts_list' %}" method="get" class="posts-title-form">
+			<label class="col-sm-3">
+				<input type="radio" name="choice" id="optionsRadiosAll" value="all" {% if choice == 'all' %}checked{% endif %}> Wszystkie posty
+			</label>
+			<label class="col-sm-2">
+				<input type="radio" name="choice" id="optionsRadiosDim" value="dim" {% if choice == 'dim' %}checked{% endif %}> DIM
+			</label>
+			<label class="col-sm-2">
+				<input type="radio" name="choice" id="optionsRadiosGem" value="gem" {% if choice == 'gem' %}checked{% endif %}> GEM
+			</label>
+			<div>
+				<input type="submit" class="col-sm-1" value="Wyszukaj">
+			</div>
+		</form>
+		<br>
+		<ul class="posts-title-list">
+			{% for post in posts %}
+				<li><a href="{{ post.url }}">{{ post.title }}</a></li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+{% endblock %}

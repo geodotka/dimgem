@@ -69,7 +69,17 @@
 							{% endif %}
 						</ul>
 					</div>
-					<a class="btn btn-success menu-item" role="button" href="{% url 'search' %}">Szukaj</a>
+					<div class="btn-group">
+						<span class="btn btn-success menu-item">Szukaj</span>
+						<button type="button" class="btn btn-success dropdown-toggle menu-item-button" data-toggle="dropdown" aria-expanded="false">
+							<span class="caret"></span>
+							<span class="sr-only">Toggle Dropdown</span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'search' %}">Po słowie kluczowym</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-2" href="{% url 'show_alphabetical_posts_list' %}">Lista postów</a></li>
+						</ul>
+					</div>
 					<a class="btn btn-success menu-item" role="button" href="{% url 'contact' %}">Kontakt</a>
 					{% if not request.user.is_authenticated %}
 						<a class="btn btn-success menu-item" role="button" href="{% url 'log_in' %}?next={{request.path}}">Zaloguj</a>

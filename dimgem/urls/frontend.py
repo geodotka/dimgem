@@ -4,7 +4,7 @@
 from django.conf.urls import patterns, url
 
 from ..const import DIM, GEM
-from ..views.frontend import ShowPostView
+from ..views.frontend import ShowPostView, show_alphabetical_posts_list
 
 
 urlpatterns = patterns('dimgem.views.frontend',
@@ -62,4 +62,6 @@ urlpatterns = patterns('dimgem.views.frontend',
     url(r'^poczekalnia/$', 'waiting_room', name='waiting_room'),
     url(r'^uwagi_do_postow/$', 'approve_note_to_post',
         name='approve_note_to_post'),
+    url(r'^lista_alfabetyczna$', show_alphabetical_posts_list,
+        name='show_alphabetical_posts_list'),
 )
