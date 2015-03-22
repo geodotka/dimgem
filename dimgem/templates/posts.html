@@ -41,6 +41,23 @@
 					</div>
 				</div>
 			</div>
+			{% if request.user.is_superuser %}
+				<div>
+					<button type="button" data-post-id="{{ post.id }}" class="btn btn-default js-change-post-text-show-form">Popraw treść</button>
+				</div>
+				<div class="js-change-post-text-form change-post-text-form" data-post-id="{{ post.id }}">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Popraw treść: </label>
+						<textarea class="js-change-post-text" data-post-id="{{ post.id }}"></textarea>
+						<span class="js-change-post-text-error" data-post-id="{{ post.id }}"></span>
+					</div>
+					<div>
+						<span class="col-sm-2"></span>
+						<button type="button" class="js-change-post-text-button" data-post-id="{{ post.id }}">Zapisz</button>
+						<button class="js-change-post-text-cancel" data-post-id="{{ post.id }}">Anuluj</button>
+					</div>
+				</div>
+			{% endif %}
 			<div>
 				<button type="button" data-post-id="{{ post.id }}" class="btn btn-default js-show-form">Zgłoś błąd</button>
 			</div>
@@ -98,5 +115,6 @@
 		<script type="text/coffeescript" src="{{ STATIC_URL }}js/report_mistake_to_post.coffee"></script>
 		<script type="text/coffeescript" src="{{ STATIC_URL }}js/preview_picture.coffee"></script>
 		<script type="text/coffeescript" src="{{ STATIC_URL }}js/add_anchor_to_post.coffee"></script>
+		<script type="text/coffeescript" src="{{ STATIC_URL }}js/change_post_text.coffee"></script>
 	{% endcompress %}
 {% endblock %}

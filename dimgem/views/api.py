@@ -2,8 +2,10 @@
 # encoding: utf-8
 
 from annoying.decorators import ajax_request
+
 from ..forms import ReportMistakeToPost, AcceptNoteToPostForm, \
     RefuseNoteToPostForm
+from ..models import Post
 
 
 @ajax_request
@@ -61,4 +63,26 @@ def get_result_of_accepting_or_refusing_note_to_post(request, form):
         result['success'] = False
         result['errors'] = form.errors
 
+    return result
+
+
+@ajax_request
+def change_post_text(request):
+    post_id = request.POST['post_id']
+    post_text = request.POST['post_text']
+    result = {}
+    if request.user.is_superuser:
+        post = Post.objects.get(id=post_id)
+        if post:
+            post.old_text = post.text
+            post.text = post_text
+            post.save()
+            result['success'] = True
+            result['post_id'] = post_id
+        else:
+            result['success'] = False
+            result['error'] = 'Coś poszło nie tak. Spróbuj jeszcze raz'
+    else:
+        result['success'] = False
+        result['error'] = 'Nie masz uprawnień do zmiany treści posta.'
     return result

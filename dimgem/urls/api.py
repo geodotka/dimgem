@@ -12,4 +12,5 @@ urlpatterns = patterns(
         name='accept_note_to_post'),
     url(r'^refuse_note_to_post$', 'refuse_note_to_post',
         name='refuse_note_to_post'),
+    url(r'^change_post_text$', 'change_post_text', name='change_post_text'),
 )

@@ -173,3 +173,12 @@ h4 {
 .posts-title-form, .posts-title-list {
 	margin: 30px;
 }
+
+.change-post-text-form {
+	display: none;
+}
+
+.js-change-post-text-show-form {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
