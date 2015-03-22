@@ -21,21 +21,21 @@ def home(request):
 
     context = {
         'dim_grammar_posts': Post.objects.filter(
-            dim=DIM, categories__name='Gramatyka', is_approved=True)[:5],
+            dim=True, categories__name='Gramatyka', is_approved=True)[:5],
         'dim_vocabulary_posts': Post.objects.filter(
-            dim=DIM, categories__name='Słownictwo', is_approved=True)[:5],
+            dim=True, categories__name='Słownictwo', is_approved=True)[:5],
         'dim_curiosities_posts': Post.objects.filter(
-            dim=DIM, categories__name='Ciekawostki', is_approved=True)[:5],
+            dim=True, categories__name='Ciekawostki', is_approved=True)[:5],
         'dim_false_friends_posts': Post.objects.filter(
-            dim=DIM, categories__name='False friends', is_approved=True)[:5],
+            dim=True, categories__name='False friends', is_approved=True)[:5],
         'gem_grammar_posts': Post.objects.filter(
-            dim=GEM, categories__name='Gramatyka', is_approved=True)[:5],
+            dim=False, categories__name='Gramatyka', is_approved=True)[:5],
         'gem_vocabulary_posts': Post.objects.filter(
-            dim=GEM, categories__name='Słownictwo', is_approved=True)[:5],
+            dim=False, categories__name='Słownictwo', is_approved=True)[:5],
         'gem_curiosities_posts': Post.objects.filter(
-            dim=GEM, categories__name='Ciekawostki', is_approved=True)[:5],
+            dim=False, categories__name='Ciekawostki', is_approved=True)[:5],
         'gem_false_friends_posts': Post.objects.filter(
-            dim=GEM, categories__name='False friends', is_approved=True)[:5]
+            dim=False, categories__name='False friends', is_approved=True)[:5]
     }
     return render(request, 'home.html', context)
 
