@@ -10,7 +10,7 @@ from django.core.urlresolvers import reverse
 from django.views.generic import ListView
 from django.shortcuts import render, redirect
 
-from ..const import DIM, PAGINATE_BY
+from ..const import DIM, PAGINATE_BY, GEM
 from ..forms import SearchingForm, RegisterForm, LoginForm,\
     AddNewPostForm, ReportMistakeToPost, AcceptNoteToPostForm,\
     RefuseNoteToPostForm
@@ -18,7 +18,26 @@ from ..models import Category, Post, Vote, NoteToPost
 
 
 def home(request):
-    return render(request, 'home.html')
+
+    context = {
+        'dim_grammar_posts': Post.objects.filter(
+            dim=DIM, categories__name='Gramatyka', is_approved=True)[:5],
+        'dim_vocabulary_posts': Post.objects.filter(
+            dim=DIM, categories__name='Słownictwo', is_approved=True)[:5],
+        'dim_curiosities_posts': Post.objects.filter(
+            dim=DIM, categories__name='Ciekawostki', is_approved=True)[:5],
+        'dim_false_friends_posts': Post.objects.filter(
+            dim=DIM, categories__name='False friends', is_approved=True)[:5],
+        'gem_grammar_posts': Post.objects.filter(
+            dim=GEM, categories__name='Gramatyka', is_approved=True)[:5],
+        'gem_vocabulary_posts': Post.objects.filter(
+            dim=GEM, categories__name='Słownictwo', is_approved=True)[:5],
+        'gem_curiosities_posts': Post.objects.filter(
+            dim=GEM, categories__name='Ciekawostki', is_approved=True)[:5],
+        'gem_false_friends_posts': Post.objects.filter(
+            dim=GEM, categories__name='False friends', is_approved=True)[:5]
+    }
+    return render(request, 'home.html', context)
 
 
 def dimgem(request, view_name):
