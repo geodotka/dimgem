@@ -15,7 +15,9 @@
 					{{ post.posted_date|date:"d.m.Y" }} {{ post.author }}: <a class="js-anchor" data-post-id="{{ post.id }}" href="#{{ post.id }}">{{ post.title }}</a>
 				</div>
 				<div class="container-text">
-					{{ post.text|linebreaks }}
+					{% autoescape off %}
+						{{ post.text|linebreaks }}
+					{% endautoescape %}
 				</div>
 				{% if post.picture %}
 					<div class="container-picture">
