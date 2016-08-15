@@ -10,7 +10,7 @@ from django.core.urlresolvers import reverse
 from django.views.generic import ListView
 from django.shortcuts import render, redirect
 
-from ..const import DIM, PAGINATE_BY, GEM
+from ..const import DIM, PAGINATE_BY
 from ..forms import SearchingForm, RegisterForm, LoginForm,\
     AddNewPostForm, ReportMistakeToPost, AcceptNoteToPostForm,\
     RefuseNoteToPostForm
@@ -23,7 +23,8 @@ def home(request):
     dim_vocabulary_post = Post.objects.filter(
         dim=True, categories__name='Słownictwo', is_approved=True).first()
     dim_curiosities_post = Post.objects.filter(
-        dim=True, categories__name='Ciekawostki', is_approved=True).first()
+        dim=True, categories__name='Ciekawostki', is_approved=True) \
+        .exclude(text__icontains='<div>').first()
     dim_false_friends_post = Post.objects.filter(
         dim=True, categories__name='False friends', is_approved=True).first()
     gem_grammar_post = Post.objects.filter(
