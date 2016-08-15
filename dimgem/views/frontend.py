@@ -18,24 +18,32 @@ from ..models import Category, Post, Vote, NoteToPost
 
 
 def home(request):
+    dim_grammar_post = Post.objects.filter(
+        dim=True, categories__name='Gramatyka', is_approved=True).first()
+    dim_vocabulary_post = Post.objects.filter(
+        dim=True, categories__name='Słownictwo', is_approved=True).first()
+    dim_curiosities_post = Post.objects.filter(
+        dim=True, categories__name='Ciekawostki', is_approved=True).first()
+    dim_false_friends_post = Post.objects.filter(
+        dim=True, categories__name='False friends', is_approved=True).first()
+    gem_grammar_post = Post.objects.filter(
+        dim=False, categories__name='Gramatyka', is_approved=True).first()
+    gem_vocabulary_post = Post.objects.filter(
+        dim=False, categories__name='Słownictwo', is_approved=True).first()
+    gem_curiosities_post = Post.objects.filter(
+        dim=False, categories__name='Ciekawostki', is_approved=True).first()
+    gem_false_friends_post = Post.objects.filter(
+        dim=False, categories__name='False friends', is_approved=True).first()
 
     context = {
-        'dim_grammar_posts': Post.objects.filter(
-            dim=True, categories__name='Gramatyka', is_approved=True)[:5],
-        'dim_vocabulary_posts': Post.objects.filter(
-            dim=True, categories__name='Słownictwo', is_approved=True)[:5],
-        'dim_curiosities_posts': Post.objects.filter(
-            dim=True, categories__name='Ciekawostki', is_approved=True)[:5],
-        'dim_false_friends_posts': Post.objects.filter(
-            dim=True, categories__name='False friends', is_approved=True)[:5],
-        'gem_grammar_posts': Post.objects.filter(
-            dim=False, categories__name='Gramatyka', is_approved=True)[:5],
-        'gem_vocabulary_posts': Post.objects.filter(
-            dim=False, categories__name='Słownictwo', is_approved=True)[:5],
-        'gem_curiosities_posts': Post.objects.filter(
-            dim=False, categories__name='Ciekawostki', is_approved=True)[:5],
-        'gem_false_friends_posts': Post.objects.filter(
-            dim=False, categories__name='False friends', is_approved=True)[:5]
+        'dim_grammar_post': dim_grammar_post,
+        'dim_vocabulary_post': dim_vocabulary_post,
+        'dim_curiosities_post': dim_curiosities_post,
+        'dim_false_friends_post': dim_false_friends_post,
+        'gem_grammar_post': gem_grammar_post,
+        'gem_vocabulary_post': gem_vocabulary_post,
+        'gem_curiosities_post': gem_curiosities_post,
+        'gem_false_friends_post': gem_false_friends_post,
     }
     return render(request, 'home.html', context)
 

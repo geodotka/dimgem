@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<!-- Website Template by freewebsitetemplates.com -->
+
+{% load compress %}
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>DimGem</title>
+
+	{% compress js %}
+		<script type="text/javascript" src="{{ STATIC_URL }}js/vendor/jquery-1.10.2.min.js"></script>
+	{% endcompress %}
+
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+	{% compress css %}
+		<link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/style2.css" charset="utf-8">
+	{% endcompress %}
+</head>
+<body>
+	<div id="page">
+		<div id="header">
+			<div class="navigation">
+				<ul class="primary">
+					<li class="selected">
+						<a href="{% url 'home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
+					</li>
+					<li>
+						<a href="{% url 'dim' %}">DIM</a>
+					</li>
+					<li>
+						<a href="{% url 'gem' %}">GEM</a>
+					</li>
+				</ul>
+				<ul class="secondary">
+					<li>
+						<a href="{% url 'contact' %}">Kontakt</a>
+					</li>
+					<li>
+					{% if not request.user.is_authenticated %}
+						<a href="{% url 'log_in' %}?next={{request.path}}">Zaloguj</a>
+					{% else %}
+						<a href="{% url 'log_out' %}">Wyloguj</a>
+					{% endif %}
+					</li>
+					<li>
+						<a href="{% url 'search' %}"><i class="fa fa-search" aria-hidden="true"></i></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="body">
+			{% block content %}
+			{% endblock %}
+		</div>
+		<div id="footer">
+			<p>
+				&copy; Copyright by geodotka 2016. Made in Poland by geodotka. Nie wszystko jest made in China.
+			</p>
+		</div>
+	</div>
+</body>
+</html>

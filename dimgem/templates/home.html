@@ -1,124 +1,112 @@
-{% extends "base.html" %}
+{% extends "base2.html" %}
+
+{% load compress %}
+
 {% block content %}
-	<label>Ostatnie posty w każdej z kategorii:</label>
-	<hr>
-	<div>
-		<h4>DIM -> Gramatyka</h4>
+	<div class="header">
+		{% load static from staticfiles %}
+		<img src="{% static 'dimgem/banerdimgem.jpg' %}">
 	</div>
-	<div>
-		{% if dim_grammar_posts %}
-			{% for post in dim_grammar_posts %}
-				<div class="container-header">
-					{{ post.posted_date|date:"d.m.Y" }}: <a class="js-anchor" data-post-id="{{ post.id }}" href="{{ post.url }}">{{ post.title }}</a>
-				</div>
-			{% endfor %}
-		{% else %}
-			Nie było jeszcze postów w tej kategorii
-		{% endif %}
+	<div class="footer">
+		<div class="box">
+			<h5><a href="{% url 'dim_grammar' %}">DIM Gramatyka</a></h5>
+			<a class="post js-anchor" data-post-id="{{ dim_grammar_post.id }}" href="{{ dim_grammar_post.url }}">
+				<span>{{ dim_grammar_post.posted_date|date:"d.m.Y" }}</span>
+				{{ dim_grammar_post.title }}
+				<p>
+					{% autoescape off %}
+						{{ dim_grammar_post.text|linebreaks }}
+					{% endautoescape %}
+				</p>
+			</a>
+		</div>
+		<div class="box">
+			<h5><a href="{% url 'dim_vocabulary' %}">DIM Słownictwo</a></h5>
+			<a class="post js-anchor" data-post-id="{{ dim_vocabulary_post.id }}" href="{{ dim_vocabulary_post.url }}">
+				<span>{{ dim_vocabulary_post.posted_date|date:"d.m.Y" }}</span>
+				{{ dim_vocabulary_post.title }}
+				<p>
+					{% autoescape off %}
+						{{ dim_vocabulary_post.text|linebreaks }}
+					{% endautoescape %}
+				</p>
+			</a>
+		</div>
+		<div class="box">
+			<h5><a href="{% url 'dim_curiosities' %}">DIM Ciekawostki</a></h5>
+			<a class="post js-anchor" data-post-id="{{ dim_curiosities_post.id }}" href="{{ dim_curiosities_post.url }}">
+				<span>{{ dim_curiosities_post.posted_date|date:"d.m.Y" }}</span>
+				{{ dim_curiosities_post.title }}
+				<p>
+					{% autoescape off %}
+						{{ dim_curiosities_post.text|linebreaks }}
+					{% endautoescape %}
+				</p>
+			</a>
+		</div>
+		<div class="box">
+			<h5><a href="{% url 'dim_false_friends' %}">DIM False friends</a></h5>
+			<a class="post js-anchor" data-post-id="{{ dim_false_friends_post.id }}" href="{{ dim_false_friends_post.url }}">
+				<span>{{ dim_false_friends_post.posted_date|date:"d.m.Y" }}</span>
+				{{ dim_false_friends_post.title }}
+				<p>
+					{% autoescape off %}
+						{{ dim_false_friends_post.text|linebreaks }}
+					{% endautoescape %}
+				</p>
+			</a>
+		</div>
+
+		<div class="box">
+			<h5><a href="{% url 'gem_grammar' %}">GEM Gramatyka</a></h5>
+			<a class="post js-anchor" data-post-id="{{ gem_grammar_post.id }}" href="{{ gem_grammar_post.url }}">
+				<span>{{ gem_grammar_post.posted_date|date:"d.m.Y" }}</span>
+				{{ gem_grammar_post.title }}
+				<p>
+					{% autoescape off %}
+						{{ gem_grammar_post.text|linebreaks }}
+					{% endautoescape %}
+				</p>
+			</a>
+		</div>
+		<div class="box">
+			<h5><a href="{% url 'gem_vocabulary' %}">DIM Słownictwo</a></h5>
+			<a class="post js-anchor" data-post-id="{{ gem_vocabulary_post.id }}" href="{{ gem_vocabulary_post.url }}">
+				<span>{{ gem_vocabulary_post.posted_date|date:"d.m.Y" }}</span>
+				{{ gem_vocabulary_post.title }}
+				<p>
+					{% autoescape off %}
+						{{ gem_vocabulary_post.text|linebreaks }}
+					{% endautoescape %}
+				</p>
+			</a>
+		</div>
+		<div class="box">
+			<h5><a href="{% url 'gem_curiosities' %}">DIM Ciekawostki</a></h5>
+			<a class="post js-anchor" data-post-id="{{ gem_curiosities_post.id }}" href="{{ gem_curiosities_post.url }}">
+				<span>{{ gem_curiosities_post.posted_date|date:"d.m.Y" }}</span>
+				{{ gem_curiosities_post.title }}
+				<p>
+					{% autoescape off %}
+						{{ gem_curiosities_post.text|linebreaks }}
+					{% endautoescape %}
+				</p>
+			</a>
+		</div>
+		<div class="box">
+			<h5><a href="{% url 'gem_false_friends' %}">DIM False friends</a></h5>
+			<a class="post js-anchor" data-post-id="{{ gem_false_friends_post.id }}" href="{{ gem_false_friends_post.url }}">
+				<span>{{ gem_false_friends_post.posted_date|date:"d.m.Y" }}</span>
+				{{ gem_false_friends_post.title }}
+				<p>
+					{% autoescape off %}
+						{{ gem_false_friends_post.text|linebreaks }}
+					{% endautoescape %}
+				</p>
+			</a>
+		</div>
 	</div>
-	<hr>
-	<div>
-		<h4>DIM -> Słownictwo</h4>
-	</div>
-	<div>
-		{% if dim_vocabulary_posts %}
-			{% for post in dim_vocabulary_posts %}
-				<div class="container-header">
-					{{ post.posted_date|date:"d.m.Y" }}: <a class="js-anchor" data-post-id="{{ post.id }}" href="{{ post.url }}">{{ post.title }}</a>
-				</div>
-			{% endfor %}
-		{% else %}
-			Nie było jeszcze postów w tej kategorii
-		{% endif %}
-	</div>
-	<hr>
-	<div>
-		<h4>DIM -> Ciekawostki</h4>
-	</div>
-	<div>
-		{% if dim_curiosities_posts %}
-			{% for post in dim_curiosities_posts %}
-				<div class="container-header">
-					{{ post.posted_date|date:"d.m.Y" }}: <a class="js-anchor" data-post-id="{{ post.id }}" href="{{ post.url }}">{{ post.title }}</a>
-				</div>
-			{% endfor %}
-		{% else %}
-			Nie było jeszcze postów w tej kategorii
-		{% endif %}
-	</div>
-	<hr>
-	<div>
-	<h4>DIM -> False friends</h4>
-	</div>
-	<div>
-		{% if dim_false_friends_posts %}
-			{% for post in dim_false_friends_posts %}
-				<div class="container-header">
-					{{ post.posted_date|date:"d.m.Y" }}: <a class="js-anchor" data-post-id="{{ post.id }}" href="{{ post.url }}">{{ post.title }}</a>
-				</div>
-			{% endfor %}
-		{% else %}
-			Nie było jeszcze postów w tej kategorii
-		{% endif %}
-	</div>
-	<hr>
-	<div>
-		<h4>GEM -> Gramatyka</h4>
-	</div>
-	<div>
-		{% if gem_grammar_posts %}
-			{% for post in gem_grammar_posts %}
-				<div class="container-header">
-					{{ post.posted_date|date:"d.m.Y" }}: <a class="js-anchor" data-post-id="{{ post.id }}" href="{{ post.url }}">{{ post.title }}</a>
-				</div>
-			{% endfor %}
-		{% else %}
-			Nie było jeszcze postów w tej kategorii
-		{% endif %}
-	</div>
-	<hr>
-	<div>
-		<h4>GEM -> Słownictwo</h4>
-	</div>
-	<div>
-		{% if gem_vocabulary_posts %}
-			{% for post in gem_vocabulary_posts %}
-				<div class="container-header">
-					{{ post.posted_date|date:"d.m.Y" }}: <a class="js-anchor" data-post-id="{{ post.id }}" href="{{ post.url }}">{{ post.title }}</a>
-				</div>
-			{% endfor %}
-		{% else %}
-			Nie było jeszcze postów w tej kategorii
-		{% endif %}
-	</div>
-	<hr>
-	<div>
-		<h4>GEM -> Ciekawostki</h4>
-	</div>
-	<div>
-		{% if gem_curiosities_posts %}
-			{% for post in gem_curiosities_posts %}
-				<div class="container-header">
-					{{ post.posted_date|date:"d.m.Y" }}: <a class="js-anchor" data-post-id="{{ post.id }}" href="{{ post.url }}">{{ post.title }}</a>
-				</div>
-			{% endfor %}
-		{% else %}
-			Nie było jeszcze postów w tej kategorii
-		{% endif %}
-	</div>
-	<hr>
-	<div>
-	<h4>GEM -> False friends</h4>
-	</div>
-	<div>
-		{% if gem_false_friends_posts %}
-			{% for post in gem_false_friends_posts %}
-				<div class="container-header">
-					{{ post.posted_date|date:"d.m.Y" }}K: <a class="js-anchor" data-post-id="{{ post.id }}" href="{{ post.url }}">{{ post.title }}</a>
-				</div>
-			{% endfor %}
-		{% else %}
-			Nie było jeszcze postów w tej kategorii
-		{% endif %}
-	</div>
+	{% compress js %}
+		<script type="text/coffeescript" src="{{ STATIC_URL }}js/add_anchor_to_post.coffee"></script>
+	{% endcompress %}
 {% endblock %}
