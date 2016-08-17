@@ -1,6 +1,6 @@
 {% extends "base2.html" %}
 
-{% load compress %}
+{% block home %} class="selected"{% endblock %}
 
 {% block content %}
 	<div class="header">
@@ -106,7 +106,4 @@
 			</a>
 		</div>
 	</div>
-	{% compress js %}
-		<script type="text/coffeescript" src="{{ STATIC_URL }}js/add_anchor_to_post.coffee"></script>
-	{% endcompress %}
 {% endblock %}

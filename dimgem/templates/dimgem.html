@@ -1,66 +1,75 @@
-{% extends "base.html" %}
-{% block content %}
-	<h3>One post a day, and life is OK.</h3>
-	<hr>
-	{% if view_name == 'dim' %}
-		<h3>DIM - Dorothy's Italian Manual</h3>
-		<ul>
-			<li>"dim light" - przyćmione światło</li>
-			<li>"dim voice" - słaby głos</li>
-			<li>"dim recollection" - niewyraźne wspomnienie</li>
-			<li>"dim feelings" - niejasne uczucia</li>
-			<li>"dim outlook" - marne widoki</li>
-		</ul>
-	{% endif %}
-	{% if view_name == 'gem' %}
-		<h3>GEM - George's English Manual</h3>
-		<ul>
-			<li>"gem" - kamień szlachetny</li>
-		</ul>
-	{% endif %}
+{% extends "base2.html" %}
 
-    {% if posts %}
-        <h3>Dzisiejsza dawka nauki:</h3>
-        {% for post in posts %}
-			<div class="container">
-				<hr>
-				<div class="container-header">
-					<div>
-						Kategoria: {{ post.categories }}
-					</div>
-					<div>
-						{{post.posted_date|date:"d.m.Y"}} {{post.author}}: <a href="{{ post.url }}">{{post.title}}</a>
-					</div>
-				</div>
-				<div class="container-text">
-					{{post.text|linebreaks}}
-				</div>
-				{% if post.picture %}
-					<div class="container-picture">
+{% block dim %}{% if view_name == 'dim' %} class="selected"{% endif %}{% endblock %}
+{% block gem %}{% if view_name == 'gem' %} class="selected"{% endif %}{% endblock %}
+
+
+{% block content %}
+	<div class="content">
+		<ul class="subnavigation">
+			{% if view_name == 'dim' %}
+				<li><a href="{% url 'dim_grammar' %}">Gramatyka</a></li>
+				<li><a href="{% url 'dim_vocabulary' %}">Słownictwo</a></li>
+				<li><a href="{% url 'dim_curiosities' %}">Ciekawostki</a></li>
+				<li><a href="{% url 'dim_false_friends' %}">False friends</a></li>
+			{% else %}
+				<li><a href="{% url 'gem_grammar' %}">Gramatyka</a></li>
+				<li><a href="{% url 'gem_vocabulary' %}">Słownictwo</a></li>
+				<li><a href="{% url 'gem_curiosities' %}">Ciekawostki</a></li>
+				<li><a href="{% url 'gem_false_friends' %}">False friends</a></li>
+			{% endif %}
+		</ul>
+		<h2>{% if view_name == 'dim' %}DIM{% else %}GEM{% endif %}</h2>
+		<div class="featured">
+			<div>
+				<p>
+					<h4>One post a day, and life is OK.</h4>
+					{% if view_name == 'dim' %}
+						<b>Dorothy's Italian Manual</b>
+						<ul>
+							<li>"dim light" - przyćmione światło</li>
+							<li>"dim voice" - słaby głos</li>
+							<li>"dim recollection" - niewyraźne wspomnienie</li>
+							<li>"dim feelings" - niejasne uczucia</li>
+							<li>"dim outlook" - marne widoki</li>
+						</ul>
+					{% else %}
+						<b>George's English Manual</b>
+						<ul>
+							<li>"gem" - kamień szlachetny</li>
+						</ul>
+					{% endif %}
+				<p>
+			</div>
+		</div>
+		<ul class="article">
+			{% for post in posts %}
+				<li>
+					{% if post.picture %}
 						<img src="{{ MEDIA_URL }}{{ post.picture.name }}" alt="{{ post.picture.name }}" />
-					</div>
-				{% endif %}
-				<div class="picture-votes">
-					{% load static from staticfiles %}
-					<div class="container-vote">
-						<a href="{% url view_name %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}" /></a> Podoba mi się
-						<a href="{% url view_name %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}" /></a> Nie podoba mi się
-					</div>
-					<div class="container-results">
-						{{ post.votes_up }} x <img src="{% static 'dimgem/StarHappy.png' %}" />
-						{{ post.votes_down }} x <img src="{% static 'dimgem/StarSad.png' %}" />
-					</div>
-					<div class="container-message">
+					{% endif %}
+					<p>
+						{{post.posted_date|date:"d.m.Y"}} <a class="post js-anchor" data-post-id="{{ dim_grammar_post.id }}" href="{{ post.url }}">{{post.title}}</a> ({{ post.categories }})
+					</p>
+					<p>
+						{% autoescape off %}
+							{{post.text|linebreaks}}
+						{% endautoescape %}
+					</p>
+					<p>
+						{% load static from staticfiles %}
+						<a href="{% url view_name %}?post-id={{ post.id }}&vote=1"><img src="{% static 'dimgem/StarHappy.png' %}"></a> <span>Podoba mi się ({{ post.votes_up }})</span><br>
+						<a href="{% url view_name %}?post-id={{ post.id }}&vote=0"><img src="{% static 'dimgem/StarSad.png' %}"></a> <span>Nie podoba mi się ({{ post.votes_down }})</span>
+
 						{% if votes %}
+							<br>
 							{% if votes.post_id == post.id and votes.vote == False %}
 								Ha! Nie oszukuj, już głosował(a/e)ś!
 							{% endif %}
 						{% endif %}
-					</div>
-				</div>
-			</div>
-        {% endfor %}
-    {% else %}
-        <h4>Dziś jeszcze nie było żadnych postów.</h4>
-    {% endif %}
+					</p>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
 {% endblock %}

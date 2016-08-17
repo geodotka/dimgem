@@ -22,28 +22,28 @@
 		<div id="header">
 			<div class="navigation">
 				<ul class="primary">
-					<li class="selected">
+					<li{% block home %}{% endblock %}>
 						<a href="{% url 'home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
 					</li>
-					<li>
+					<li{% block dim %}{% endblock %}>
 						<a href="{% url 'dim' %}">DIM</a>
 					</li>
-					<li>
+					<li{% block gem %}{% endblock %}>
 						<a href="{% url 'gem' %}">GEM</a>
 					</li>
 				</ul>
 				<ul class="secondary">
-					<li>
+					<li{% block contact %}{% endblock %}>
 						<a href="{% url 'contact' %}">Kontakt</a>
 					</li>
-					<li>
+					<li{% block login %}{% endblock %}>
 					{% if not request.user.is_authenticated %}
 						<a href="{% url 'log_in' %}?next={{request.path}}">Zaloguj</a>
 					{% else %}
 						<a href="{% url 'log_out' %}">Wyloguj</a>
 					{% endif %}
 					</li>
-					<li>
+					<li{% block search %}{% endblock %}>
 						<a href="{% url 'search' %}"><i class="fa fa-search" aria-hidden="true"></i></a>
 					</li>
 				</ul>
@@ -59,5 +59,8 @@
 			</p>
 		</div>
 	</div>
+	{% compress js %}
+		<script type="text/coffeescript" src="{{ STATIC_URL }}js/add_anchor_to_post.coffee"></script>
+	{% endcompress %}
 </body>
 </html>

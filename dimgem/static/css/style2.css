@@ -258,16 +258,15 @@ body {
 #body .content .featured {
 	margin: 0;
 	overflow: hidden;
-	padding: 0;
+	padding: 0 50px;
 }
-#body .content .featured h3 {
+#body .content .featured h4 {
 	color: #940f16;
-	font-size: 33px;
+	font-size: 20px;
 	font-weight: normal;
 	margin: 0;
 	padding: 35px 0 30px;
 	text-indent: 0;
-	text-transform: uppercase;
 }
 #body .content .featured > a {
 	display: block;
@@ -305,12 +304,11 @@ body {
 	list-style: none;
 	margin: 0;
 	overflow: hidden;
-	padding: 50px 20px 0;
-	width: 440px;
+	padding: 20px 20px 0;
+	min-width: 500px;
 }
 #body .content ul.article li h3 {
-	font-size: 16px;
-	font-weight: bold;
+
 	margin: 0;
 	padding: 0;
 	text-indent: 0;
@@ -323,6 +321,10 @@ body {
 	margin: 0 20px 0 0;
 	padding: 8px 0 0;
 	width: 202px;
+}
+#body .content ul.article li a {
+	font-size: 16px;
+	font-weight: bold;
 }
 #body .content ul.article li > a:hover {
 	opacity: 0.8;
@@ -338,6 +340,9 @@ body {
 #body .content ul.article li p a {
 	color: #59463d;
 	text-decoration: none;
+}
+#body .content ul.article li p span {
+	font-size: 14px;
 }
 #body .content .section {
 	float: left;
@@ -448,4 +453,27 @@ body {
 	margin: 0;
 	padding: 0 10px 0 0;
 	text-shadow: 0 2px 0 #f4ebe1;
+}
+.subnavigation {
+	list-style: none;
+	margin-bottom: 50px;
+}
+.subnavigation li {
+	width: 200px;
+	float: left;
+}
+.subnavigation li a {
+	color: #8b5d21;
+	display: block;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 20px;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 0 1px 0 #ebdebe;
+	text-transform: uppercase;
+}
+.subnavigation li a:hover {
+	color: #9c1119;
 }

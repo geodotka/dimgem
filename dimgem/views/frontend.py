@@ -54,8 +54,10 @@ def dimgem(request, view_name):
     if request.method == 'GET' and request.GET.get('post-id') and \
             request.GET.get('vote'):
         votes = vote(request)
+    dim = view_name == DIM
+    posts = Post.objects.filter(dim=dim).order_by('-id')[:10]
     context = {
-        'posts': show_todays_posts(view_name),
+        'posts': posts,
         'view_name': view_name,
         'votes': votes,
     }
@@ -129,15 +131,6 @@ def vote(request):
         'vote': True,
         'post_id': post_id,
     }
-
-
-def show_todays_posts(dimgem_type):
-    today_date = datetime.datetime.now().date()
-    dimgem = dimgem_type == DIM
-    posts = Post.objects.filter(
-        posted_date=today_date, dim=dimgem, is_approved=True)\
-        .order_by('categories').all()
-    return posts
 
 
 def search(request):
